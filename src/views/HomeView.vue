@@ -12,8 +12,12 @@ homeview
       >
         <img src="@/assets/avatar.png" alt="Profile" class="profile-img" />
         <div v-if="showMenu" class="dropdown-menu">
-          <router-link to="/home/profile">👤 Profil</router-link>
-          <a href="#" @click.prevent="handleLogout">🚪 Çıkış Yap</a>
+          <router-link to="/home/profile"
+            >👤 {{ $t('home.profile') }}</router-link
+          >
+          <a href="#" @click.prevent="handleLogout"
+            >🚪 {{ $t('home.logout') }}</a
+          >
         </div>
       </div>
 

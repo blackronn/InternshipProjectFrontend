@@ -7,12 +7,6 @@ export async function fetchJobTitle(): Promise<string> {
 
   const email = account.username;
 
-  // SADECE TEST AMAÇLI: Belirli email için override
-  if (email === 'yigit.cay@etiya.com') {
-    console.log('TEST OVERRIDE: Kullanıcı mentor olarak tanıtıldı.');
-    return 'mentor';
-  }
-
   const result = await msalApp.acquireTokenSilent({
     account,
     scopes: ['User.Read'],
