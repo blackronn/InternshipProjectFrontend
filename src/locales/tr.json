@@ -1,68 +1,68 @@
 {
 
-    "notifications": {
-      "assignmentCreated": "Görev başarıyla oluşturuldu.",
-      "reportSent": "Günlük raporun gönderildi.",
-      "profileUpdated": "Profil başarıyla güncellendi.",
-      "errorOccurred": "Bir hata oluştu.",
-      "fieldsRequired": "Tüm alanlar doldurulmalıdır.",
-      "internAdded": "Stajyer başarıyla eklendi.",
-      "announcementSaved": "Duyuru başarıyla kaydedildi."
-    },
-    "sidebar": {
-      "assignments": "Atanan Görevler",
-      "journal": "Stajyer Defter Bilgileri",
-      "officeInfo": "Ofis Bilgileri",
-      "supportStaff": "Stajyer Destek Sorumluları",
-      "sendReport": "Günlük Rapor Gönder",
-      "faq": "S.S.S",
-      "about": "Hakkında",
-      "language": "Dil"
-    },
-    "dashboard": {
-      "assignments": "Görevler",
-      "reports": "Raporlar",
-      "interns": "Stajyerler"
-    },
-    "report": {
-      "title": "Günlük Rapor Gönder",
-      "label": "Rapor Dosyası (.pdf, .docx):",
-      "confirm": "Raporu göndermek istediğinize emin misiniz?",
-      "confirmYes": "Evet, Gönder",
-      "success": "✅ Rapor başarıyla gönderildi!",
-      "fail": "❌ Gönderim sırasında hata oluştu.",
-      "invalidFile": "❌ Yalnızca .pdf ve .docx dosyalarına izin verilmektedir.",
-      "errorMentorEmail": "❌ Mentor email alınamadı."
-    },
-    "buttons": {
-      "send": "Gönder",
-      "cancel": "İptal",
-      "delete": "Sil",
-      "detail": "Detay",
-      "close": "Kapat",
-      "yes": "Evet",
-      "no": "Hayır"
-    },
-    "mentorSidebar": {
-      "assignmentOps": "Görev İşlemleri",
-      "assignmentTrack": "Görev Takibi",
-      "announcement": "Duyuru İşlemleri",
-      "support": "Stajyer Destek",
-      "admin": "Admin Paneli",
-      "about": "Hakkında",
-      "language": "Dil"
-    },
-    "pie": {
-      "done": "Yapıldı",
-      "notDone": "Yapılmadı"
-    },
-    "about": {
-      "title": "Hakkında",
-      "p1": "Lantern, stajyerlerin şirket içerisindeki gelişim süreçlerinin daha sistemli ve etkin bir şekilde izlenebilmesi amacıyla geliştirilen bir staj takip platformudur. Bu proje, mentor-stajyer iletişiminin yalnızca Teams gibi iletişim araçlarıyla sınırlı kalmasının önüne geçerek, şirket sistemine entegre bir yapı üzerinden takip ve geri bildirim süreçlerini daha verimli hale getirmeyi hedeflemektedir.",
-      "p2": "Lantern, Aykut Eren, Asude Güven, Mustafa Göktuğ Yılmaz ve Yiğit Emre Çay’dan oluşan dört kişilik bir stajyer ekibi tarafından hayata geçirilmiştir. Proje süresince Erol Safa Uzun, Mert Erdoğan, Mustafa Şen ve Süleyman Atakan Keçeci rehberlik görevini üstlenmiş; geliştirme süreci, rehberlerimizin bilgi ve tecrübeleriyle yönlendirilmiştir. Takım liderleri Anıl Çiçek ve Mert Karabulut ise teknik süreçlerde destek sağlamış ve sürece katkıda bulunmuşlardır. Proje fikri, Erol Safa Uzun tarafından ortaya koyulmuş, ekip tarafından tasarlanarak uygulamaya geçirilmiştir.",
-      "p3": "Projenin ismi olan Lantern, bir deniz fenerinin karanlıkta yolunu arayan gemilere rehberlik etmesi fikrinden esinlenmiştir. Bu metafor, staj süreci boyunca rehberlerimizin bizlere yön gösterici rolünü sembolik olarak yansıtmaktadır."
-    },
-    "admin": {
+  "notifications": {
+    "assignmentCreated": "Görev başarıyla oluşturuldu.",
+    "reportSent": "Günlük raporun gönderildi.",
+    "profileUpdated": "Profil başarıyla güncellendi.",
+    "errorOccurred": "Bir hata oluştu.",
+    "fieldsRequired": "Tüm alanlar doldurulmalıdır.",
+    "internAdded": "Stajyer başarıyla eklendi.",
+    "announcementSaved": "Duyuru başarıyla kaydedildi."
+  },
+  "sidebar": {
+    "assignments": "Atanan Görevler",
+    "journal": "Stajyer Defter Bilgileri",
+    "officeInfo": "Ofis Bilgileri",
+    "supportStaff": "Stajyer Destek Sorumluları",
+    "sendReport": "Günlük Rapor Gönder",
+    "faq": "S.S.S",
+    "about": "Hakkında",
+    "language": "Dil"
+  },
+  "dashboard": {
+    "assignments": "Görevler",
+    "reports": "Raporlar",
+    "interns": "Stajyerler"
+  },
+  "report": {
+    "title": "Günlük Rapor Gönder",
+    "label": "Rapor Dosyası (.pdf, .docx):",
+    "confirm": "Raporu göndermek istediğinize emin misiniz?",
+    "confirmYes": "Evet, Gönder",
+    "success": "✅ Rapor başarıyla gönderildi!",
+    "fail": "❌ Gönderim sırasında hata oluştu.",
+    "invalidFile": "❌ Yalnızca .pdf ve .docx dosyalarına izin verilmektedir.",
+    "errorMentorEmail": "❌ Mentor email alınamadı."
+  },
+  "buttons": {
+    "send": "Gönder",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "detail": "Detay",
+    "close": "Kapat",
+    "yes": "Evet",
+    "no": "Hayır"
+  },
+  "mentorSidebar": {
+    "assignmentOps": "Görev İşlemleri",
+    "assignmentTrack": "Görev Takibi",
+    "announcement": "Duyuru İşlemleri",
+    "support": "Stajyer Destek",
+    "admin": "Admin Paneli",
+    "about": "Hakkında",
+    "language": "Dil"
+  },
+  "pie": {
+    "done": "Yapıldı",
+    "notDone": "Yapılmadı"
+  },
+  "about": {
+    "title": "Hakkında",
+    "p1": "Lantern, stajyerlerin şirket içerisindeki gelişim süreçlerinin daha sistemli ve etkin bir şekilde izlenebilmesi amacıyla geliştirilen bir staj takip platformudur. Bu proje, mentor-stajyer iletişiminin yalnızca Teams gibi iletişim araçlarıyla sınırlı kalmasının önüne geçerek, şirket sistemine entegre bir yapı üzerinden takip ve geri bildirim süreçlerini daha verimli hale getirmeyi hedeflemektedir.",
+    "p2": "Lantern, Aykut Eren, Asude Güven, Mustafa Göktuğ Yılmaz ve Yiğit Emre Çay’dan oluşan dört kişilik bir stajyer ekibi tarafından hayata geçirilmiştir. Proje süresince Erol Safa Uzun, Mert Erdoğan, Mustafa Şen ve Süleyman Atakan Keçeci rehberlik görevini üstlenmiş; geliştirme süreci, rehberlerimizin bilgi ve tecrübeleriyle yönlendirilmiştir. Takım liderleri Anıl Çiçek ve Mert Karabulut ise teknik süreçlerde destek sağlamış ve sürece katkıda bulunmuşlardır. Proje fikri, Erol Safa Uzun tarafından ortaya koyulmuş, ekip tarafından tasarlanarak uygulamaya geçirilmiştir.",
+    "p3": "Projenin ismi olan Lantern, bir deniz fenerinin karanlıkta yolunu arayan gemilere rehberlik etmesi fikrinden esinlenmiştir. Bu metafor, staj süreci boyunca rehberlerimizin bizlere yön gösterici rolünü sembolik olarak yansıtmaktadır."
+  },
+  "admin": {
     "title": "Admin Paneli",
     "subtitle": "Mentor ve Stajyer Eşleştirme Ekranı",
     "mentor": "Mentor",
@@ -99,6 +99,10 @@
   },
   "assignmentList": {
     "title": "Görev Takibi",
+    "myAssignments": " Benim Görevlerim",
+    "allAssignments": " Tüm Görevler",
+    "myAssignmentsLoading": "Benim görevlerim yükleniyor...",
+    "myAssignmentsEmpty": "Size atanmış görev bulunmuyor.",
     "statusAll": "Statü (Tümü)",
     "loading": "Yükleniyor...",
     "loadError": "Görevler yüklenemedi.",
@@ -139,178 +143,178 @@
       "assignedAt": "Atanma Tarihi",
       "dueDate": "Bitiş Tarihi"
     }
-    },
-    "createAccount": {
-      "welcome": "HOŞGELDİN ETİYALI!",
-      "title": "Mentor Kayıt Formu",
-      "name": "Ad",
-      "surname": "Soyad",
-      "email": "Email",
-      "phone": "Telefon",
-      "namePlaceholder": "Adınızı giriniz",
-      "surnamePlaceholder": "Soyadınızı giriniz",
-      "phonePlaceholder": "05xx xxx xx xx",
-      "submit": "Kaydı Tamamla"
-    },
-    "faq": {
-      "title": "Sıkça Sorulan Sorular",
-      "loading": "Yükleniyor...",
-      "loadError": "Sorular yüklenirken bir hata oluştu."
-    },
-    "home": {
-      "profile": "Profil",
-      "logout": "Çıkış Yap",
-      "logoutError": "Çıkış yapılamadı!"
-    },
-    "internDashboard": {
-      "assignmentStatus": "Assignment Durumu",
-      "noAssignment": "Henüz bir assignment atanmadı.",
-      "announcements": "Sana Özel Duyurular",
-      "noAnnouncements": "Şu anda herhangi bir duyuru yok.",
-      "todo": "Yapılacaklar",
-      "noTodos": "Henüz görev atanmadı ya da tüm görevler tamamlandı.",
-      "table": {
-        "announcement": "Duyuru",
-        "date": "Tarih",
-        "task": "Görev",
-        "assigned": "Atanma",
-        "priority": "Öncelik",
-        "status": "Durum"
-      }
-    },
-    "internSupport": {
-      "title": "Stajyer Destek",
+  },
+  "createAccount": {
+    "welcome": "HOŞGELDİN ETİYALI!",
+    "title": "Mentor Kayıt Formu",
+    "name": "Ad",
+    "surname": "Soyad",
+    "email": "Email",
+    "phone": "Telefon",
+    "namePlaceholder": "Adınızı giriniz",
+    "surnamePlaceholder": "Soyadınızı giriniz",
+    "phonePlaceholder": "05xx xxx xx xx",
+    "submit": "Kaydı Tamamla"
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "loading": "Yükleniyor...",
+    "loadError": "Sorular yüklenirken bir hata oluştu."
+  },
+  "home": {
+    "profile": "Profil",
+    "logout": "Çıkış Yap",
+    "logoutError": "Çıkış yapılamadı!"
+  },
+  "internDashboard": {
+    "assignmentStatus": "Assignment Durumu",
+    "noAssignment": "Henüz bir assignment atanmadı.",
+    "announcements": "Sana Özel Duyurular",
+    "noAnnouncements": "Şu anda herhangi bir duyuru yok.",
+    "todo": "Yapılacaklar",
+    "noTodos": "Henüz görev atanmadı ya da tüm görevler tamamlandı.",
+    "table": {
+      "announcement": "Duyuru",
+      "date": "Tarih",
+      "task": "Görev",
+      "assigned": "Atanma",
+      "priority": "Öncelik",
+      "status": "Durum"
+    }
+  },
+  "internSupport": {
+    "title": "Stajyer Destek",
+    "intern": "Stajyer",
+    "hrName": "İnsan Kaynakları Adı",
+    "hrEmail": "İnsan Kaynakları Email",
+    "itName": "Bilgi Teknolojileri Adı",
+    "itEmail": "Bilgi Teknolojileri Email",
+    "assign": "Eşleştir",
+    "existingAssignments": "Mevcut Atamalar",
+    "department": "Departman",
+    "name": "İsim",
+    "email": "Email",
+    "action": "İşlem",
+    "fetchError": "Veri çekerken hata oluştu.",
+    "alreadyAssigned": "Bu stajyer için IK ve IT atamaları zaten tanımlı.",
+    "selectIntern": "Lütfen bir stajyer seçin.",
+    "enterOneSupport": "Lütfen en az bir destek sorumlusu girin.",
+    "success": "Eşleştirme başarıyla tamamlandı.",
+    "error": "Eşleştirme sırasında hata oluştu.",
+    "deleteError": "Silme sırasında hata oluştu."
+  },
+  "common": {
+    "select": "Seçin",
+    "delete": "Sil",
+    "confirmDelete": "Silmek istediğine emin misiniz?"
+  },
+  "internView": {
+    "welcome": "HOŞGELDİN ETİYALI!",
+    "title": "Intern Kayıt Formu",
+    "name": "Ad",
+    "surname": "Soyad",
+    "university": "Üniversite",
+    "department": "Bölüm",
+    "selectUniversity": "Üniversite Seçiniz",
+    "selectDepartment": "Bölüm Seçiniz",
+    "startDate": "Staj Başlangıç Tarihi",
+    "endDate": "Staj Bitiş Tarihi",
+    "email": "Email",
+    "phone": "Telefon",
+    "phonePlaceholder": "05xx xxx xx xx",
+    "submit": "Kaydı Tamamla"
+  },
+  "loginView": {
+    "title": "Lantern'a Hoşgeldiniz!",
+    "subtitle": "Staj portalına giriş yap",
+    "button": "GİRİŞ YAP"
+  },
+  "mentorAnnouncementForm": {
+    "title": "Yeni Duyuru Ekle",
+    "labelTitle": "Başlık:",
+    "labelContent": "İçerik:",
+    "submitButton": "Duyuru Ekle",
+    "mentorError": "Mentor bilgisi alınamadı.",
+    "emptyFields": "Lütfen başlık ve içerik girin.",
+    "mentorMissing": "Mentor ID bulunamadı.",
+    "success": "Duyuru başarıyla eklendi!",
+    "failure": "Duyuru eklenirken bir hata oluştu."
+  },
+  "greetings": {
+    "morning": "Günaydın",
+    "afternoon": "İyi günler",
+    "evening": "İyi akşamlar"
+  },
+  "mentorDashboard": {
+    "assignmentStatus": "Stajyer Görev Durumu",
+    "noAssignment": "Henüz bir görev atanmadı.",
+    "assignments": "Atanmış Görevler",
+    "noAssignments": "Henüz atanmış görev bulunamadı.",
+    "interns": "Stajyerler",
+    "noInterns": "Henüz stajyer bilgisi bulunamadı.",
+    "table": {
       "intern": "Stajyer",
-      "hrName": "İnsan Kaynakları Adı",
-      "hrEmail": "İnsan Kaynakları Email",
-      "itName": "Bilgi Teknolojileri Adı",
-      "itEmail": "Bilgi Teknolojileri Email",
-      "assign": "Eşleştir",
-      "existingAssignments": "Mevcut Atamalar",
-      "department": "Departman",
-      "name": "İsim",
+      "task": "Görev",
+      "priority": "Öncelik",
+      "status": "Durum",
+      "name": "Ad Soyad",
       "email": "Email",
-      "action": "İşlem",
-      "fetchError": "Veri çekerken hata oluştu.",
-      "alreadyAssigned": "Bu stajyer için IK ve IT atamaları zaten tanımlı.",
-      "selectIntern": "Lütfen bir stajyer seçin.",
-      "enterOneSupport": "Lütfen en az bir destek sorumlusu girin.",
-      "success": "Eşleştirme başarıyla tamamlandı.",
-      "error": "Eşleştirme sırasında hata oluştu.",
-      "deleteError": "Silme sırasında hata oluştu."
-    },
-    "common": {
-      "select": "Seçin",
-      "delete": "Sil",
-      "confirmDelete": "Silmek istediğine emin misiniz?"
-    },
-    "internView": {
-      "welcome": "HOŞGELDİN ETİYALI!",
-      "title": "Intern Kayıt Formu",
-      "name": "Ad",
-      "surname": "Soyad",
       "university": "Üniversite",
       "department": "Bölüm",
-      "selectUniversity": "Üniversite Seçiniz",
-      "selectDepartment": "Bölüm Seçiniz",
-      "startDate": "Staj Başlangıç Tarihi",
-      "endDate": "Staj Bitiş Tarihi",
-      "email": "Email",
-      "phone": "Telefon",
-      "phonePlaceholder": "05xx xxx xx xx",
-      "submit": "Kaydı Tamamla"
-    },
-    "loginView": {
-      "title": "Lantern'a Hoşgeldiniz!",
-      "subtitle": "Staj portalına giriş yap",
-      "button": "GİRİŞ YAP"
-    },
-    "mentorAnnouncementForm": {
-      "title": "Yeni Duyuru Ekle",
-      "labelTitle": "Başlık:",
-      "labelContent": "İçerik:",
-      "submitButton": "Duyuru Ekle",
-      "mentorError": "Mentor bilgisi alınamadı.",
-      "emptyFields": "Lütfen başlık ve içerik girin.",
-      "mentorMissing": "Mentor ID bulunamadı.",
-      "success": "Duyuru başarıyla eklendi!",
-      "failure": "Duyuru eklenirken bir hata oluştu."
-    },
-    "greetings": {
-  "morning": "Günaydın",
-  "afternoon": "İyi günler",
-  "evening": "İyi akşamlar"
-},
-"mentorDashboard": {
-  "assignmentStatus": "Stajyer Görev Durumu",
-  "noAssignment": "Henüz bir görev atanmadı.",
-  "assignments": "Atanmış Görevler",
-  "noAssignments": "Henüz atanmış görev bulunamadı.",
-  "interns": "Stajyerler",
-  "noInterns": "Henüz stajyer bilgisi bulunamadı.",
-  "table": {
-    "intern": "Stajyer",
-    "task": "Görev",
-    "priority": "Öncelik",
-    "status": "Durum",
+      "startDate": "Başlangıç",
+      "endDate": "Bitiş"
+    }
+  },
+  "mentorProfile": {
+    "back": "Ana Sayfaya Dön",
+    "title": "Profil Bilgileri",
+    "name": "Ad Soyad",
+    "email": "Email"
+  },
+  "mentorView": {
+    "title": "Mentor Kayıt Formu",
+    "name": "Ad",
+    "surname": "Soyad",
+    "expertise": "Uzmanlık Alanı",
+    "submit": "Kaydı Tamamla"
+  },
+  "officeInfo": {
+    "loading": "Ofis bilgileri yükleniyor...",
+    "notFound": "Ofis bilgileri bulunamadı.",
+    "officeTitle": "Ofisi Bilgileri",
+    "address": "Adres",
+    "phone": "Telefon",
+    "transport": "Ulaşım",
+    "errorGeneral": "Ofis bilgileri yüklenemedi. Lütfen sistem yöneticinizle görüşün.",
+    "error404": "Size atanmış bir ofis bilgisi sistemde bulunamadı."
+  },
+  "internProfile": {
+    "back": "Ana Sayfaya Dön",
+    "title": "Profil Bilgileri",
     "name": "Ad Soyad",
     "email": "Email",
     "university": "Üniversite",
     "department": "Bölüm",
-    "startDate": "Başlangıç",
-    "endDate": "Bitiş"
+    "mentor": "Mentor"
+  },
+  "redirect": {
+    "redirecting": "Yönlendiriliyorsunuz..."
+  },
+  "reportView": {
+    "title": "Stajyer Defter Bilgileri",
+    "p1": "Etiya, müşteri deneyimi odaklı ve yapay zeka destekli dijital dönüşüm çözümleri sunan global bir teknoloji şirketidir. Şirket, 3 kıtada ve 7 ülkede faaliyet göstermekte olup 1600’den fazla çalışanıyla sektörde hizmet vermektedir.",
+    "p2": "2004 yılında kurulan Etiya, birlikte başarmanın gücüne inanarak hem şirket içi ekiplerine hem müşterilerine hem de çevre ve topluma katkı sağlamak için çalışmalarını sürdürmektedir. Hedeflerini, sınırlarını ve karşılaştığı zorlukları her geçen gün aşarak durmaksızın ilerlemeyi misyon edinmiştir.",
+    "p3": "Şirketin kadrosu, %39 kadın ve %61 erkek çalışan oranına sahiptir. Ortalama yaşın 31 olduğu Etiya’da genç ve dinamik bir ekip yapısı dikkat çekmektedir. Çok uluslu yapısıyla farklı lokasyonlarda etkin bir şekilde faaliyet gösteren şirket, teknolojiyi insan odaklı bir yaklaşımla birleştirmektedir.",
+    "fields": {
+      "company": "Şirket Ünvanı:",
+      "account": "Hesap:",
+      "iban": "IBAN:",
+      "branch": "Şube:",
+      "meris": "Meris No:",
+      "tax": "Vergi No:"
+    }
+  },
+  "staffView": {
+    "title": "Senin İçin Buradayız"
   }
-},
-"mentorProfile": {
-  "back": "Ana Sayfaya Dön",
-  "title": "Profil Bilgileri",
-  "name": "Ad Soyad",
-  "email": "Email"
-},
-"mentorView": {
-  "title": "Mentor Kayıt Formu",
-  "name": "Ad",
-  "surname": "Soyad",
-  "expertise": "Uzmanlık Alanı",
-  "submit": "Kaydı Tamamla"
-},
-"officeInfo": {
-  "loading": "Ofis bilgileri yükleniyor...",
-  "notFound": "Ofis bilgileri bulunamadı.",
-  "officeTitle": "Ofisi Bilgileri",
-  "address": "Adres",
-  "phone": "Telefon",
-  "transport": "Ulaşım",
-  "errorGeneral": "Ofis bilgileri yüklenemedi. Lütfen sistem yöneticinizle görüşün.",
-  "error404": "Size atanmış bir ofis bilgisi sistemde bulunamadı."
-},
-"internProfile": {
-  "back": "Ana Sayfaya Dön",
-  "title": "Profil Bilgileri",
-  "name": "Ad Soyad",
-  "email": "Email",
-  "university": "Üniversite",
-  "department": "Bölüm",
-  "mentor": "Mentor"
-},
-"redirect": {
-  "redirecting": "Yönlendiriliyorsunuz..."
-},
-"reportView": {
-  "title": "Stajyer Defter Bilgileri",
-  "p1": "Etiya, müşteri deneyimi odaklı ve yapay zeka destekli dijital dönüşüm çözümleri sunan global bir teknoloji şirketidir. Şirket, 3 kıtada ve 7 ülkede faaliyet göstermekte olup 1600’den fazla çalışanıyla sektörde hizmet vermektedir.",
-  "p2": "2004 yılında kurulan Etiya, birlikte başarmanın gücüne inanarak hem şirket içi ekiplerine hem müşterilerine hem de çevre ve topluma katkı sağlamak için çalışmalarını sürdürmektedir. Hedeflerini, sınırlarını ve karşılaştığı zorlukları her geçen gün aşarak durmaksızın ilerlemeyi misyon edinmiştir.",
-  "p3": "Şirketin kadrosu, %39 kadın ve %61 erkek çalışan oranına sahiptir. Ortalama yaşın 31 olduğu Etiya’da genç ve dinamik bir ekip yapısı dikkat çekmektedir. Çok uluslu yapısıyla farklı lokasyonlarda etkin bir şekilde faaliyet gösteren şirket, teknolojiyi insan odaklı bir yaklaşımla birleştirmektedir.",
-  "fields": {
-    "company": "Şirket Ünvanı:",
-    "account": "Hesap:",
-    "iban": "IBAN:",
-    "branch": "Şube:",
-    "meris": "Meris No:",
-    "tax": "Vergi No:"
-  }
-},
-"staffView": {
-  "title": "Senin İçin Buradayız"
-}
 }

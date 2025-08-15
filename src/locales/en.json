@@ -1,316 +1,320 @@
 {
-  
-    "notifications": {
-      "assignmentCreated": "Assignment successfully created.",
-      "reportSent": "Your daily report has been sent.",
-      "profileUpdated": "Profile updated successfully.",
-      "errorOccurred": "An error has occurred.",
-      "fieldsRequired": "All fields are required.",
-      "internAdded": "Intern added successfully.",
-      "announcementSaved": "Announcement has been saved."
-      },
-    "sidebar": {
-      "assignments": "Assigned Tasks",
-      "journal": "Intern Journal Info",
-      "officeInfo": "Office Information",
-      "supportStaff": "Intern Support Staff",
-      "sendReport": "Submit Daily Report",
-      "faq": "FAQ",
-      "about": "About",
-      "language": "Language"
-    },
-    "dashboard": {
-      "assignments": "Assignments",
-      "reports": "Reports",
-      "interns": "Interns"
-    },
-    "report": {
-      "title": "Submit Daily Report",
-      "label": "Report File (.pdf, .docx):",
-      "confirm": "Are you sure you want to send the report?",
-      "confirmYes": "Yes, Send",
-      "success": "✅ Report sent successfully!",
-      "fail": "❌ An error occurred while sending.",
-      "invalidFile": "❌ Only .pdf and .docx files are allowed.",
-      "errorMentorEmail": "❌ Mentor email could not be fetched."
-    },
-    "buttons": {
-      "send": "Send",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "detail": "Details",
-      "close": "Close",
-      "yes": "Yes",
-      "no": "No"  
-    },
-    "mentorSidebar": {
-      "assignmentOps": "Assignment Operations",
-      "assignmentTrack": "Assignment Tracking",
-      "announcement": "Announcement Management",
-      "support": "Intern Support",
-      "admin": "Admin Panel",
-      "about": "About",
-      "language": "Language"
-    },
-    "pie": {
-      "done": "Completed",
-      "notDone": "Not Completed"
-    },
-    "about": {
-      "title": "About",
-      "p1": "Lantern is an internship tracking platform developed to monitor interns’ progress within the company in a more systematic and efficient way. This project aims to improve the feedback and tracking processes by moving beyond basic communication tools like Teams, and instead using an integrated system within the company.",
-      "p2": "Lantern was created by a team of four interns: Aykut Eren, Asude Güven, Mustafa Göktuğ Yılmaz, and Yiğit Emre Çay. During the project, Erol Safa Uzun, Mert Erdoğan, Mustafa Şen, and Süleyman Atakan Keçeci acted as mentors; and their guidance played a critical role in the development process. Team leads Anıl Çiçek and Mert Karabulut provided technical support. The project idea was proposed by Erol Safa Uzun and implemented by the team.",
-      "p3": "The name Lantern is inspired by the idea of a lighthouse guiding ships through the darkness. This metaphor symbolizes the guiding role of our mentors during the internship journey."
-    },  
-    "admin": {
-      "title": "Admin Panel",
-      "subtitle": "Mentor and Intern Matching Screen",
-      "mentor": "Mentor",
-      "intern": "Intern",
-      "assign": "Assign",
-      "all": "All",
-      "currentRelations": "Current Relations",
-      "noRelations": "No matching found.",
-      "relationDetail": "Relation Details",
-      "mentorEmail": "Mentor Email",
-      "internEmail": "Intern Email",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "deactivate": "Deactivate"
-      },
-      "assignmentForm": {
-        "title": "Add New Assignment",
-        "mentor": "Mentor",
-        "intern": "Intern",
-        "selectIntern": "Please select an intern",
-        "name": "Assignment Name",
-        "description": "Description",
-        "priority": "Priority",
-        "assignedAt": "Assigned Date",
-        "dueDate": "Target Due Date",
-        "submit": "Add Assignment"
-      },
-      "priorities": {
-        "Urgent": "Urgent",
-        "High": "High",
-        "Medium": "Medium",
-        "Low": "Low",
-        "Optional": "Optional"
-      },
-      "assignmentList": {
-        "title": "Assignment Tracking",
-        "statusAll": "Status (All)",
-        "loading": "Loading...",
-        "loadError": "Failed to load assignments.",
-        "noAssignments": "No assignments assigned yet.",
-        "statusLocked": "This task is completed and cannot be changed.",
-        "confirmComplete": "Are you sure you want to mark this task as completed?",
-        "page": "Page",
-        "sortOptions": {
-          "assignedAt": "Assigned Date",
-          "dueDate": "Due Date"
-        },
-        "table": {
-          "name": "Task Name",
-          "desc": "Description",
-          "assigned": "Assigned",
-          "due": "Due",
-          "priority": "Priority",
-          "mentor": "Mentor",
-          "status": "Status"
-        }
-      },
-      "statuses": {
-        "To Do": "To Do",
-        "In Progress": "In Progress",
-        "Completed": "Completed"
-      },
-      "assignmentTracker": {
-        "title": "Assignment Tracking",
-        "loading": "Loading...",
-        "noAssignments": "No assignments found.",
-        "page": "Page",
-        "filter": {
-          "internAll": "Intern (All)",
-          "statusAll": "Status (All)",
-          "priorityAll": "Priority (All)"
-        },
-        "sort": {
-          "assignedAt": "Assigned Date",
-          "dueDate": "Due Date"
-        }
-      },
-        "createAccount": {
-          "welcome": "WELCOME TO ETIYA!",
-          "title": "Mentor Registration Form",
-          "name": "Name",
-          "surname": "Surname",
-          "email": "Email",
-          "phone": "Phone",
-          "namePlaceholder": "Enter your name",
-          "surnamePlaceholder": "Enter your surname",
-          "phonePlaceholder": "05xx xxx xx xx",
-          "submit": "Complete Registration"
-        },
-        "faq": {
-          "title": "Frequently Asked Questions",
-          "loading": "Loading...",
-          "loadError": "An error occurred while loading the questions."
-        },
-        "home": {
-          "profile": "Profile",
-          "logout": "Log Out",
-          "logoutError": "Logout failed!"
-        },
-        "internDashboard": {
-          "assignmentStatus": "Assignment Status",
-          "noAssignment": "No assignments assigned yet.",
-          "announcements": "Personal Announcements",
-          "noAnnouncements": "There are no announcements at the moment.",
-          "todo": "To Do",
-          "noTodos": "No assignments or all tasks completed.",
-          "table": {
-            "announcement": "Announcement",
-            "date": "Date",
-            "task": "Task",
-            "assigned": "Assigned",
-            "priority": "Priority",
-            "status": "Status"
-          }
-          },
-          "internSupport": {
-            "title": "Intern Support",
-            "intern": "Intern",
-            "hrName": "HR Name",
-            "hrEmail": "HR Email",
-            "itName": "IT Name",
-            "itEmail": "IT Email",
-            "assign": "Assign",
-            "existingAssignments": "Current Assignments",
-            "department": "Department",
-            "name": "Name",
-            "email": "Email",
-            "action": "Action",
-            "fetchError": "An error occurred while fetching data.",
-            "alreadyAssigned": "HR and IT assignments already exist for this intern.",
-            "selectIntern": "Please select an intern.",
-            "enterOneSupport": "Please enter at least one support person.",
-            "success": "Assignment completed successfully.",
-            "error": "An error occurred during assignment.",
-            "deleteError": "An error occurred while deleting."
-          },
-          "common": {
-            "select": "Select",
-            "delete": "Delete",
-            "confirmDelete": "Are you sure you want to delete this?"
-          },
-          "internView": {
-            "welcome": "WELCOME TO ETIYA!",
-            "title": "Intern Registration Form",
-            "name": "Name",
-            "surname": "Surname",
-            "university": "University",
-            "department": "Department",
-            "selectUniversity": "Select University",
-            "selectDepartment": "Select Department",
-            "startDate": "Internship Start Date",
-            "endDate": "Internship End Date",
-            "email": "Email",
-            "phone": "Phone",
-            "phonePlaceholder": "05xx xxx xx xx",
-            "submit": "Submit Registration"
-          },
-          "loginView": {
-            "title": "Welcome to Lantern!",
-            "subtitle": "Access your internship portal",
-            "button": "LOGIN"
-          },
-          "mentorAnnouncementForm": {
-            "title": "Add New Announcement",
-            "labelTitle": "Title:",
-            "labelContent": "Content:",
-            "submitButton": "Add Announcement",
-            "mentorError": "Failed to fetch mentor information.",
-            "emptyFields": "Please enter both title and content.",
-            "mentorMissing": "Mentor ID not found.",
-            "success": "Announcement added successfully!",
-            "failure": "An error occurred while adding the announcement."
-          },
-          "greetings": {
-  "morning": "Good morning",
-  "afternoon": "Good afternoon",
-  "evening": "Good evening"
-},
-"mentorDashboard": {
-  "assignmentStatus": "Intern Assignment Status",
-  "noAssignment": "No assignments assigned yet.",
-  "assignments": "Assigned Tasks",
-  "noAssignments": "No assigned tasks found.",
-  "interns": "Interns",
-  "noInterns": "No intern information available.",
-  "table": {
+
+  "notifications": {
+    "assignmentCreated": "Assignment successfully created.",
+    "reportSent": "Your daily report has been sent.",
+    "profileUpdated": "Profile updated successfully.",
+    "errorOccurred": "An error has occurred.",
+    "fieldsRequired": "All fields are required.",
+    "internAdded": "Intern added successfully.",
+    "announcementSaved": "Announcement has been saved."
+  },
+  "sidebar": {
+    "assignments": "Assigned Tasks",
+    "journal": "Intern Journal Info",
+    "officeInfo": "Office Information",
+    "supportStaff": "Intern Support Staff",
+    "sendReport": "Submit Daily Report",
+    "faq": "FAQ",
+    "about": "About",
+    "language": "Language"
+  },
+  "dashboard": {
+    "assignments": "Assignments",
+    "reports": "Reports",
+    "interns": "Interns"
+  },
+  "report": {
+    "title": "Submit Daily Report",
+    "label": "Report File (.pdf, .docx):",
+    "confirm": "Are you sure you want to send the report?",
+    "confirmYes": "Yes, Send",
+    "success": "✅ Report sent successfully!",
+    "fail": "❌ An error occurred while sending.",
+    "invalidFile": "❌ Only .pdf and .docx files are allowed.",
+    "errorMentorEmail": "❌ Mentor email could not be fetched."
+  },
+  "buttons": {
+    "send": "Send",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "detail": "Details",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "mentorSidebar": {
+    "assignmentOps": "Assignment Operations",
+    "assignmentTrack": "Assignment Tracking",
+    "announcement": "Announcement Management",
+    "support": "Intern Support",
+    "admin": "Admin Panel",
+    "about": "About",
+    "language": "Language"
+  },
+  "pie": {
+    "done": "Completed",
+    "notDone": "Not Completed"
+  },
+  "about": {
+    "title": "About",
+    "p1": "Lantern is an internship tracking platform developed to monitor interns’ progress within the company in a more systematic and efficient way. This project aims to improve the feedback and tracking processes by moving beyond basic communication tools like Teams, and instead using an integrated system within the company.",
+    "p2": "Lantern was created by a team of four interns: Aykut Eren, Asude Güven, Mustafa Göktuğ Yılmaz, and Yiğit Emre Çay. During the project, Erol Safa Uzun, Mert Erdoğan, Mustafa Şen, and Süleyman Atakan Keçeci acted as mentors; and their guidance played a critical role in the development process. Team leads Anıl Çiçek and Mert Karabulut provided technical support. The project idea was proposed by Erol Safa Uzun and implemented by the team.",
+    "p3": "The name Lantern is inspired by the idea of a lighthouse guiding ships through the darkness. This metaphor symbolizes the guiding role of our mentors during the internship journey."
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "subtitle": "Mentor and Intern Matching Screen",
+    "mentor": "Mentor",
     "intern": "Intern",
-    "task": "Task",
+    "assign": "Assign",
+    "all": "All",
+    "currentRelations": "Current Relations",
+    "noRelations": "No matching found.",
+    "relationDetail": "Relation Details",
+    "mentorEmail": "Mentor Email",
+    "internEmail": "Intern Email",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "deactivate": "Deactivate"
+  },
+  "assignmentForm": {
+    "title": "Add New Assignment",
+    "mentor": "Mentor",
+    "intern": "Intern",
+    "selectIntern": "Please select an intern",
+    "name": "Assignment Name",
+    "description": "Description",
     "priority": "Priority",
-    "status": "Status",
+    "assignedAt": "Assigned Date",
+    "dueDate": "Target Due Date",
+    "submit": "Add Assignment"
+  },
+  "priorities": {
+    "Urgent": "Urgent",
+    "High": "High",
+    "Medium": "Medium",
+    "Low": "Low",
+    "Optional": "Optional"
+  },
+  "assignmentList": {
+    "title": "Assignment Tracking",
+    "myAssignments": "My Assignments",
+    "allAssignments": "All Assignments",
+    "myAssignmentsLoading": "Loading my assignments...",
+    "myAssignmentsEmpty": "No assignments assigned to you.",
+    "statusAll": "Status (All)",
+    "loading": "Loading...",
+    "loadError": "Failed to load assignments.",
+    "noAssignments": "No assignments assigned yet.",
+    "statusLocked": "This task is completed and cannot be changed.",
+    "confirmComplete": "Are you sure you want to mark this task as completed?",
+    "page": "Page",
+    "sortOptions": {
+      "assignedAt": "Assigned Date",
+      "dueDate": "Due Date"
+    },
+    "table": {
+      "name": "Task Name",
+      "desc": "Description",
+      "assigned": "Assigned",
+      "due": "Due",
+      "priority": "Priority",
+      "mentor": "Mentor",
+      "status": "Status"
+    }
+  },
+  "statuses": {
+    "To Do": "To Do",
+    "In Progress": "In Progress",
+    "Completed": "Completed"
+  },
+  "assignmentTracker": {
+    "title": "Assignment Tracking",
+    "loading": "Loading...",
+    "noAssignments": "No assignments found.",
+    "page": "Page",
+    "filter": {
+      "internAll": "Intern (All)",
+      "statusAll": "Status (All)",
+      "priorityAll": "Priority (All)"
+    },
+    "sort": {
+      "assignedAt": "Assigned Date",
+      "dueDate": "Due Date"
+    }
+  },
+  "createAccount": {
+    "welcome": "WELCOME TO ETIYA!",
+    "title": "Mentor Registration Form",
     "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "phone": "Phone",
+    "namePlaceholder": "Enter your name",
+    "surnamePlaceholder": "Enter your surname",
+    "phonePlaceholder": "05xx xxx xx xx",
+    "submit": "Complete Registration"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "loading": "Loading...",
+    "loadError": "An error occurred while loading the questions."
+  },
+  "home": {
+    "profile": "Profile",
+    "logout": "Log Out",
+    "logoutError": "Logout failed!"
+  },
+  "internDashboard": {
+    "assignmentStatus": "Assignment Status",
+    "noAssignment": "No assignments assigned yet.",
+    "announcements": "Personal Announcements",
+    "noAnnouncements": "There are no announcements at the moment.",
+    "todo": "To Do",
+    "noTodos": "No assignments or all tasks completed.",
+    "table": {
+      "announcement": "Announcement",
+      "date": "Date",
+      "task": "Task",
+      "assigned": "Assigned",
+      "priority": "Priority",
+      "status": "Status"
+    }
+  },
+  "internSupport": {
+    "title": "Intern Support",
+    "intern": "Intern",
+    "hrName": "HR Name",
+    "hrEmail": "HR Email",
+    "itName": "IT Name",
+    "itEmail": "IT Email",
+    "assign": "Assign",
+    "existingAssignments": "Current Assignments",
+    "department": "Department",
+    "name": "Name",
+    "email": "Email",
+    "action": "Action",
+    "fetchError": "An error occurred while fetching data.",
+    "alreadyAssigned": "HR and IT assignments already exist for this intern.",
+    "selectIntern": "Please select an intern.",
+    "enterOneSupport": "Please enter at least one support person.",
+    "success": "Assignment completed successfully.",
+    "error": "An error occurred during assignment.",
+    "deleteError": "An error occurred while deleting."
+  },
+  "common": {
+    "select": "Select",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this?"
+  },
+  "internView": {
+    "welcome": "WELCOME TO ETIYA!",
+    "title": "Intern Registration Form",
+    "name": "Name",
+    "surname": "Surname",
+    "university": "University",
+    "department": "Department",
+    "selectUniversity": "Select University",
+    "selectDepartment": "Select Department",
+    "startDate": "Internship Start Date",
+    "endDate": "Internship End Date",
+    "email": "Email",
+    "phone": "Phone",
+    "phonePlaceholder": "05xx xxx xx xx",
+    "submit": "Submit Registration"
+  },
+  "loginView": {
+    "title": "Welcome to Lantern!",
+    "subtitle": "Access your internship portal",
+    "button": "LOGIN"
+  },
+  "mentorAnnouncementForm": {
+    "title": "Add New Announcement",
+    "labelTitle": "Title:",
+    "labelContent": "Content:",
+    "submitButton": "Add Announcement",
+    "mentorError": "Failed to fetch mentor information.",
+    "emptyFields": "Please enter both title and content.",
+    "mentorMissing": "Mentor ID not found.",
+    "success": "Announcement added successfully!",
+    "failure": "An error occurred while adding the announcement."
+  },
+  "greetings": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
+  },
+  "mentorDashboard": {
+    "assignmentStatus": "Intern Assignment Status",
+    "noAssignment": "No assignments assigned yet.",
+    "assignments": "Assigned Tasks",
+    "noAssignments": "No assigned tasks found.",
+    "interns": "Interns",
+    "noInterns": "No intern information available.",
+    "table": {
+      "intern": "Intern",
+      "task": "Task",
+      "priority": "Priority",
+      "status": "Status",
+      "name": "Name",
+      "email": "Email",
+      "university": "University",
+      "department": "Department",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    }
+  },
+  "mentorProfile": {
+    "back": "Back to Home",
+    "title": "Profile Information",
+    "name": "Full Name",
+    "email": "Email"
+  },
+  "mentorView": {
+    "title": "Mentor Registration Form",
+    "name": "Name",
+    "surname": "Surname",
+    "expertise": "Area of Expertise",
+    "submit": "Complete Registration"
+  },
+  "officeInfo": {
+    "loading": "Loading office information...",
+    "notFound": "No office information found.",
+    "officeTitle": "Office Information",
+    "address": "Address",
+    "phone": "Phone",
+    "transport": "Transportation",
+    "errorGeneral": "Office information could not be loaded. Please contact your system administrator.",
+    "error404": "No assigned office found in the system for you."
+  },
+  "internProfile": {
+    "back": "Back to Homepage",
+    "title": "Profile Information",
+    "name": "Full Name",
     "email": "Email",
     "university": "University",
     "department": "Department",
-    "startDate": "Start Date",
-    "endDate": "End Date"
+    "mentor": "Mentor"
+  },
+  "redirect": {
+    "redirecting": "Redirecting..."
+  },
+  "reportView": {
+    "title": "Intern Journal Info",
+    "p1": "Etiya is a global technology company offering customer-experience-focused and AI-supported digital transformation solutions. Operating across 3 continents and 7 countries, the company employs over 1600 people.",
+    "p2": "Founded in 2004, Etiya believes in the power of achieving together and continues its efforts to contribute to its internal teams, customers, society, and environment. Its mission is to move forward relentlessly, overcoming boundaries and challenges every day.",
+    "p3": "With 39% women and 61% men employees, the company has an average age of 31 and a young and dynamic workforce. Through its multinational structure, it combines technology with a human-centric approach across diverse locations.",
+    "fields": {
+      "company": "Company Title:",
+      "account": "Account:",
+      "iban": "IBAN:",
+      "branch": "Branch:",
+      "meris": "Meris No:",
+      "tax": "Tax ID:"
+    }
+  },
+  "staffView": {
+    "title": "We're Here For You"
   }
-},
-"mentorProfile": {
-  "back": "Back to Home",
-  "title": "Profile Information",
-  "name": "Full Name",
-  "email": "Email"
-},
-"mentorView": {
-  "title": "Mentor Registration Form",
-  "name": "Name",
-  "surname": "Surname",
-  "expertise": "Area of Expertise",
-  "submit": "Complete Registration"
-},
-"officeInfo": {
-  "loading": "Loading office information...",
-  "notFound": "No office information found.",
-  "officeTitle": "Office Information",
-  "address": "Address",
-  "phone": "Phone",
-  "transport": "Transportation",
-  "errorGeneral": "Office information could not be loaded. Please contact your system administrator.",
-  "error404": "No assigned office found in the system for you."
-},
-"internProfile": {
-  "back": "Back to Homepage",
-  "title": "Profile Information",
-  "name": "Full Name",
-  "email": "Email",
-  "university": "University",
-  "department": "Department",
-  "mentor": "Mentor"
-},
-"redirect": {
-  "redirecting": "Redirecting..."
-},
-"reportView": {
-  "title": "Intern Journal Info",
-  "p1": "Etiya is a global technology company offering customer-experience-focused and AI-supported digital transformation solutions. Operating across 3 continents and 7 countries, the company employs over 1600 people.",
-  "p2": "Founded in 2004, Etiya believes in the power of achieving together and continues its efforts to contribute to its internal teams, customers, society, and environment. Its mission is to move forward relentlessly, overcoming boundaries and challenges every day.",
-  "p3": "With 39% women and 61% men employees, the company has an average age of 31 and a young and dynamic workforce. Through its multinational structure, it combines technology with a human-centric approach across diverse locations.",
-  "fields": {
-    "company": "Company Title:",
-    "account": "Account:",
-    "iban": "IBAN:",
-    "branch": "Branch:",
-    "meris": "Meris No:",
-    "tax": "Tax ID:"
-  }
-},
-"staffView": {
-  "title": "We're Here For You"
-}
 }

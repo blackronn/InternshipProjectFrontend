@@ -6,6 +6,7 @@ import {
   type Assignment,
 } from '@/utils/assignmentService';
 import { useMsal } from 'vue3-msal-plugin';
+import { useI18n } from 'vue-i18n';
 import { formatDate } from '@/utils/formatters';
 import apiClient from '@/utils/apiClients';
 
@@ -13,8 +14,14 @@ const assignments = ref<Assignment[]>([]);
 const totalPages = ref(0);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
+const currentUserId = ref<number | null>(null);
+
+// Benim görevlerim için değişkenler
+const myAssignments = ref<Assignment[]>([]);
+const isLoadingMy = ref(true);
 
 const { accounts } = useMsal();
+const { t } = useI18n();
 const email = accounts.value[0].username;
 
 const currentPage = ref(0);
@@ -35,8 +42,21 @@ const showModal = ref(false);
 const selectedAssignment = ref<Assignment | null>(null);
 const previousStatus = ref<string>('');
 
+// Güvenlik kontrolü - sadece kendi görevini güncelleyebilir
+const canEdit = (assignment: Assignment) => {
+  return (
+    assignment.internId === currentUserId.value &&
+    assignment.status !== 'Completed'
+  );
+};
+
 // Modal üzerinden onaylama akışı
 const handleStatusChange = (assignment: Assignment) => {
+  if (!canEdit(assignment)) {
+    alert('Bu görevi güncelleyemezsiniz!');
+    return;
+  }
+
   if (assignment.status === 'Completed') {
     selectedAssignment.value = assignment;
     showModal.value = true;
@@ -72,6 +92,39 @@ const cancelCompletion = () => {
   }
 };
 
+const loadMyAssignments = async () => {
+  if (!currentUserId.value) {
+    console.log('currentUserId henüz yüklenmedi');
+    return;
+  }
+
+  try {
+    isLoadingMy.value = true;
+
+    // Tüm görevlerden sadece benim olanları filtrele
+    const filteredAssignments = assignments.value.filter(
+      assignment => assignment.internId === currentUserId.value
+    );
+
+    // Status filtresi varsa uygula
+    let finalAssignments = filteredAssignments;
+    if (filters.status) {
+      finalAssignments = filteredAssignments.filter(
+        assignment => assignment.status === filters.status
+      );
+    }
+
+    myAssignments.value = finalAssignments;
+    console.log('Tüm görevler:', assignments.value.length);
+    console.log('Benim görevlerim (filtrelenmiş):', myAssignments.value.length);
+    console.log('currentUserId:', currentUserId.value);
+  } catch (err) {
+    console.error('Benim görevlerim yüklenemedi:', err);
+  } finally {
+    isLoadingMy.value = false;
+  }
+};
+
 const loadAssignments = async (internId: number) => {
   try {
     isLoading.value = true;
@@ -97,10 +150,19 @@ const loadAssignments = async (internId: number) => {
 
 onMounted(async () => {
   try {
+    console.log('onMounted başladı, email:', email);
     const res = await apiClient.get(`/api/interns/by-email?email=${email}`);
     const internId = res.data?.id;
+    console.log('API yanıtı:', res.data);
+    console.log('Bulunan internId:', internId);
+
     if (internId) {
+      currentUserId.value = internId;
+      console.log('currentUserId set edildi:', currentUserId.value);
       await loadAssignments(internId);
+      // Tüm görevler yüklendikten sonra benim görevlerimi filtrele
+      loadMyAssignments();
+
       watch(
         [
           () => currentPage.value,
@@ -108,8 +170,13 @@ onMounted(async () => {
           () => filters.sort,
           () => filters.size,
         ],
-        () => loadAssignments(internId)
+        async () => {
+          await loadAssignments(internId);
+          loadMyAssignments(); // Tüm görevler yeniden yüklendikten sonra benim görevlerimi filtrele
+        }
       );
+
+      // myCurrentPage artık yok, gerekirse ekleyebiliriz
     } else {
       error.value = 'Stajyer bilgisi alınamadı.';
     }
@@ -121,42 +188,39 @@ onMounted(async () => {
 
 <template>
   <div class="assignment-container">
-    <h2>{{ $t('assignmentList.title') }}</h2>
+    <!-- BİRİNCİ TABLO: Benim Görevlerim -->
+    <div class="my-assignments-section">
+      <h2>{{ $t('assignmentList.myAssignments') }}</h2>
 
-    <div class="filter-bar">
-      <select v-model="filters.status">
-        <option value="">{{ $t('assignmentList.statusAll') }}</option>
-        <option v-for="s in statusOptions" :key="s" :value="s">
-          {{ $t(`statuses.${s}`) }}
-        </option>
-      </select>
+      <div class="filter-bar">
+        <select v-model="filters.status">
+          <option value="">{{ $t('assignmentList.statusAll') }}</option>
+          <option v-for="s in statusOptions" :key="s" :value="s">
+            {{ $t(`statuses.${s}`) }}
+          </option>
+        </select>
 
-      <select v-model="filters.sort">
-        <option v-for="o in sortOptions" :key="o.value" :value="o.value">
-          {{ $t(`assignmentList.sortOptions.${o.value}`) }}
-        </option>
-      </select>
+        <select v-model="filters.sort">
+          <option v-for="o in sortOptions" :key="o.value" :value="o.value">
+            {{ $t(`assignmentList.sortOptions.${o.value}`) }}
+          </option>
+        </select>
 
-      <select v-model="filters.size">
-        <option :value="5">5</option>
-        <option :value="15">15</option>
-        <option :value="20">20</option>
-      </select>
-    </div>
-
-    <div v-if="isLoading" class="state-message">
-      {{ $t('assignmentList.loading') }}
-    </div>
-    <div v-else-if="error" class="state-message error">
-      {{ $t('assignmentList.loadError') }}
-    </div>
-
-    <div v-else>
-      <div v-if="assignments.length === 0" class="state-message">
-        {{ $t('assignmentList.noAssignments') }}
+        <select v-model="filters.size">
+          <option :value="5">5</option>
+          <option :value="10">10</option>
+          <option :value="15">15</option>
+        </select>
       </div>
 
-      <div class="table-scroll" v-else>
+      <div v-if="isLoadingMy" class="state-message">
+        {{ $t('assignmentList.myAssignmentsLoading') }}
+      </div>
+      <div v-else-if="myAssignments.length === 0" class="state-message">
+        {{ $t('assignmentList.myAssignmentsEmpty') }}
+      </div>
+
+      <div v-else class="table-scroll">
         <table>
           <thead>
             <tr>
@@ -170,7 +234,11 @@ onMounted(async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in assignments" :key="item.id">
+            <tr
+              v-for="item in myAssignments"
+              :key="item.id"
+              class="my-task-row"
+            >
               <td>{{ item.assignmentName }}</td>
               <td>{{ item.assignmentDesc }}</td>
               <td>{{ formatDate(item.assignedAt) }}</td>
@@ -182,12 +250,9 @@ onMounted(async () => {
                   v-model="item.status"
                   @focus="previousStatus = item.status || ''"
                   @change="handleStatusChange(item)"
-                  :disabled="item.status === 'Completed'"
-                  :title="
-                    item.status === 'Completed'
-                      ? $t('assignmentList.statusLocked')
-                      : ''
-                  "
+                  :disabled="!canEdit(item)"
+                  :title="!canEdit(item) ? 'Bu görevi güncelleyemezsiniz' : ''"
+                  :class="{ 'disabled-select': !canEdit(item) }"
                 >
                   <option v-for="s in statusOptions" :key="s" :value="s">
                     {{ $t(`statuses.${s}`) }}
@@ -198,28 +263,100 @@ onMounted(async () => {
           </tbody>
         </table>
       </div>
+    </div>
 
-      <div class="pagination">
-        <button @click="currentPage--" :disabled="currentPage === 0">◀</button>
-        <span>
-          {{ $t('assignmentList.page') }} {{ currentPage + 1 }} /
-          {{ totalPages }}
-        </span>
-        <button
-          @click="currentPage++"
-          :disabled="currentPage + 1 >= totalPages"
-        >
-          ▶
-        </button>
+    <!-- AYIRICI -->
+    <div class="section-divider"></div>
+
+    <!-- İKİNCİ TABLO: Tüm Görevler -->
+    <div class="all-assignments-section">
+      <h2>{{ $t('assignmentList.allAssignments') }}</h2>
+
+      <div v-if="isLoading" class="state-message">
+        {{ $t('assignmentList.loading') }}
+      </div>
+      <div v-else-if="error" class="state-message error">
+        {{ $t('assignmentList.loadError') }}
+      </div>
+
+      <div v-else>
+        <div v-if="assignments.length === 0" class="state-message">
+          {{ $t('assignmentList.noAssignments') }}
+        </div>
+
+        <div class="table-scroll" v-else>
+          <table>
+            <thead>
+              <tr>
+                <th>{{ $t('assignmentList.table.name') }}</th>
+                <th>{{ $t('assignmentList.table.desc') }}</th>
+                <th>{{ $t('assignmentList.table.assigned') }}</th>
+                <th>{{ $t('assignmentList.table.due') }}</th>
+                <th>{{ $t('assignmentList.table.priority') }}</th>
+                <th>{{ $t('assignmentList.table.mentor') }}</th>
+                <th>Stajyer</th>
+                <th>{{ $t('assignmentList.table.status') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="item in assignments"
+                :key="item.id"
+                :class="{
+                  'my-task-row': item.internId === currentUserId,
+                  'other-task-row': item.internId !== currentUserId,
+                }"
+              >
+                <td>{{ item.assignmentName }}</td>
+                <td>{{ item.assignmentDesc }}</td>
+                <td>{{ formatDate(item.assignedAt) }}</td>
+                <td>{{ formatDate(item.dueDate) }}</td>
+                <td>{{ $t(`priorities.${item.priority}`) }}</td>
+                <td>{{ item.mentorName }}</td>
+                <td>{{ item.internName }}</td>
+                <td>
+                  <select
+                    v-model="item.status"
+                    @focus="previousStatus = item.status || ''"
+                    @change="handleStatusChange(item)"
+                    :disabled="!canEdit(item)"
+                    :title="
+                      !canEdit(item) ? 'Bu görevi güncelleyemezsiniz' : ''
+                    "
+                    :class="{ 'disabled-select': !canEdit(item) }"
+                  >
+                    <option v-for="s in statusOptions" :key="s" :value="s">
+                      {{ $t(`statuses.${s}`) }}
+                    </option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <button @click="currentPage--" :disabled="currentPage === 0">
+            ◀
+          </button>
+          <span>
+            {{ $t('assignmentList.page') }} {{ currentPage + 1 }} /
+            {{ totalPages }}
+          </span>
+          <button
+            @click="currentPage++"
+            :disabled="currentPage + 1 >= totalPages"
+          >
+            ▶
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- ✅ MODAL -->
+    <!-- MODAL -->
     <div v-if="showModal" class="modal-overlay">
       <div class="modal-content">
-        <p>
-          {{ $t('assignmentList.confirmComplete') }}
-        </p>
+        <p>{{ $t('assignmentList.confirmComplete') }}</p>
         <div class="modal-buttons">
           <button @click="confirmCompletion">{{ $t('buttons.yes') }}</button>
           <button @click="cancelCompletion">{{ $t('buttons.no') }}</button>
@@ -264,7 +401,7 @@ thead {
 }
 th,
 td {
-  padding: 12px 18px;
+  padding: 5px 10px;
   border: 1px solid #ddd;
   text-align: left;
 }
@@ -335,5 +472,19 @@ tbody tr:hover {
 }
 .modal-buttons button:last-child {
   background-color: #e0e0e0;
+}
+
+.disabled-select {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed !important;
+}
+
+/* İki tablo arasında ayırıcı */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, #242441, #6c757d, #242441);
+  margin: 2rem 0;
+  border-radius: 2px;
 }
 </style>
