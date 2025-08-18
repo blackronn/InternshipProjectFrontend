@@ -44,10 +44,7 @@ const previousStatus = ref<string>('');
 
 // Güvenlik kontrolü - sadece kendi görevini güncelleyebilir
 const canEdit = (assignment: Assignment) => {
-  return (
-    assignment.internId === currentUserId.value &&
-    assignment.status !== 'Completed'
-  );
+  return assignment.internId === currentUserId.value;
 };
 
 // Modal üzerinden onaylama akışı
@@ -57,12 +54,16 @@ const handleStatusChange = (assignment: Assignment) => {
     return;
   }
 
-  if (assignment.status === 'Completed') {
-    selectedAssignment.value = assignment;
-    showModal.value = true;
-  } else {
-    updateStatusDirectly(assignment);
+  // Eğer görev zaten tamamlanmışsa değiştirilemez
+  if (previousStatus.value === 'Completed') {
+    alert('Tamamlanmış görevler değiştirilemez!');
+    assignment.status = previousStatus.value; // Eski duruma geri dön
+    return;
   }
+
+  // Eğer statüsü değiştiriyorsa modal göster
+  selectedAssignment.value = assignment;
+  showModal.value = true;
 };
 
 const updateStatusDirectly = async (assignment: Assignment) => {
@@ -250,9 +251,18 @@ onMounted(async () => {
                   v-model="item.status"
                   @focus="previousStatus = item.status || ''"
                   @change="handleStatusChange(item)"
-                  :disabled="!canEdit(item)"
-                  :title="!canEdit(item) ? 'Bu görevi güncelleyemezsiniz' : ''"
-                  :class="{ 'disabled-select': !canEdit(item) }"
+                  :disabled="!canEdit(item) || item.status === 'Completed'"
+                  :title="
+                    !canEdit(item)
+                      ? 'Bu görevi güncelleyemezsiniz'
+                      : item.status === 'Completed'
+                      ? 'Tamamlanmış görevler değiştirilemez'
+                      : ''
+                  "
+                  :class="{
+                    'disabled-select':
+                      !canEdit(item) || item.status === 'Completed',
+                  }"
                 >
                   <option v-for="s in statusOptions" :key="s" :value="s">
                     {{ $t(`statuses.${s}`) }}
@@ -319,11 +329,18 @@ onMounted(async () => {
                     v-model="item.status"
                     @focus="previousStatus = item.status || ''"
                     @change="handleStatusChange(item)"
-                    :disabled="!canEdit(item)"
+                    :disabled="!canEdit(item) || item.status === 'Completed'"
                     :title="
-                      !canEdit(item) ? 'Bu görevi güncelleyemezsiniz' : ''
+                      !canEdit(item)
+                        ? 'Bu görevi güncelleyemezsiniz'
+                        : item.status === 'Completed'
+                        ? 'Tamamlanmış görevler değiştirilemez'
+                        : ''
                     "
-                    :class="{ 'disabled-select': !canEdit(item) }"
+                    :class="{
+                      'disabled-select':
+                        !canEdit(item) || item.status === 'Completed',
+                    }"
                   >
                     <option v-for="s in statusOptions" :key="s" :value="s">
                       {{ $t(`statuses.${s}`) }}
@@ -356,7 +373,13 @@ onMounted(async () => {
     <!-- MODAL -->
     <div v-if="showModal" class="modal-overlay">
       <div class="modal-content">
-        <p>{{ $t('assignmentList.confirmComplete') }}</p>
+        <p>
+          {{
+            $t('assignmentList.confirmStatusChange', {
+              newStatus: $t(`statuses.${selectedAssignment?.status}`),
+            })
+          }}
+        </p>
         <div class="modal-buttons">
           <button @click="confirmCompletion">{{ $t('buttons.yes') }}</button>
           <button @click="cancelCompletion">{{ $t('buttons.no') }}</button>
@@ -387,7 +410,7 @@ h2 {
   padding: 6px;
 }
 .table-scroll {
-  max-height: 400px;
+  max-height: 1500px;
   overflow-y: auto;
   border: 1px solid #ddd;
 }
@@ -480,11 +503,22 @@ tbody tr:hover {
   cursor: not-allowed !important;
 }
 
-/* İki tablo arasında ayırıcı */
 .section-divider {
   height: 2px;
   background: linear-gradient(to right, #242441, #6c757d, #242441);
   margin: 2rem 0;
   border-radius: 2px;
+}
+
+.my-assignments-section h2 {
+  color: #242441;
+  border-left: 4px solid #242441;
+  padding-left: 1rem;
+}
+
+.all-assignments-section h2 {
+  color: #6c757d;
+  border-left: 4px solid #6c757d;
+  padding-left: 1rem;
 }
 </style>
