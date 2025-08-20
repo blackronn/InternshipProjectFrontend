@@ -108,7 +108,7 @@
     "loadError": "Görevler yüklenemedi.",
     "noAssignments": "Henüz atanmış görev yok.",
     "statusLocked": "Bu görev tamamlandı ve artık değiştirilemez.",
-    "confirmComplete": "Bu görevi tamamlandı olarak işaretlemek istediğinizden emin misiniz?",
+    "confirmStatusChange": "Bu görevin durumunu '{newStatus}' olarak değiştirmek istediğinizden emin misiniz?",
     "page": "Sayfa",
     "sortOptions": {
       "assignedAt": "Atanma Tarihi",

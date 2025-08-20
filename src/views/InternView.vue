@@ -43,6 +43,22 @@
             </option>
           </select>
         </div>
+
+        <div class="field">
+          <label>{{ $t('internView.office') }}</label>
+          <select v-model="form.officeId" required>
+            <option value="" disabled selected>
+              {{ $t('internView.selectOffice') }}
+            </option>
+            <option
+              v-for="office in offices"
+              :key="office.id"
+              :value="office.id"
+            >
+              {{ office.name }}
+            </option>
+          </select>
+        </div>
         <div class="field">
           <label>{{ $t('internView.startDate') }}</label>
           <input
@@ -93,12 +109,14 @@ const router = useRouter();
 
 const universities = ref<string[]>([]);
 const departments = ref<{ ID: number; PROGRAM_NAME: string }[]>([]);
+const offices = ref<{ id: number; name: string }[]>([]);
 
 const form = reactive({
   name: '',
   surname: '',
   university: '',
   department: '',
+  officeId: '',
   internshipStart: '',
   internshipEnd: '',
   email: '',
@@ -133,6 +151,12 @@ onMounted(async () => {
     universities.value = [];
   }
 });
+try {
+  const res = await api.get('/api/offices');
+  offices.value = res.data;
+} catch (e) {
+  offices.value = [];
+}
 
 async function fetchDepartments() {
   form.department = ''; // seçili bölümü temizle
@@ -185,6 +209,7 @@ async function onSubmit() {
       surname: form.surname,
       university: form.university,
       department: form.department,
+      officeId: parseInt(form.officeId),
       startDate: form.internshipStart,
       endDate: form.internshipEnd,
       email: form.email,

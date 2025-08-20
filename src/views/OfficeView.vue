@@ -27,8 +27,45 @@ onMounted(async () => {
       throw new Error('Kullanıcı girişi yapılmamış.');
     }
 
-    // Step 1: Get Access Token
+    // Step 1: Kullanıcının email'ini al
     const account = accounts.value[0];
+    const userEmail = account.username;
+    console.log('Kullanıcı email:', userEmail);
+
+    // Step 2: Kullanıcının rolünü kontrol et
+    try {
+      // Önce intern olarak dene
+      console.log('Intern API çağrısı yapılıyor...');
+      const internResponse = await apiClient.get('/api/interns/by-email', {
+        params: { email: userEmail },
+      });
+      console.log('Intern API yanıtı:', internResponse.data);
+
+      const intern = internResponse.data;
+
+      if (intern && intern.office) {
+        console.log("DB'den gelen office bilgisi:", intern.office);
+
+        // Eğer office bilgileri eksikse, direkt office API'sini çağır
+        if (!intern.office.address || !intern.office.phoneNumber) {
+          console.log(
+            'Office bilgileri eksik, direkt API çağrısı yapılıyor...'
+          );
+          const fullOfficeResponse = await apiClient.get(
+            `/api/offices/${intern.office.id}`
+          );
+          console.log('Direkt office API yanıtı:', fullOfficeResponse.data);
+          officeInfo.value = fullOfficeResponse.data;
+        } else {
+          officeInfo.value = intern.office;
+        }
+        return; // Intern ise burada bitir
+      }
+    } catch (internErr) {
+      console.log('Kullanıcı intern değil, mentor olarak kontrol ediliyor...');
+    }
+
+    // Step 3: Mentor ise Azure'den adres çek
     const tokenResponse = await instance
       .acquireTokenSilent({
         scopes: ['User.Read'],
@@ -45,7 +82,6 @@ onMounted(async () => {
       throw new Error('Access Token alınamadı.');
     }
 
-    // Step 2: Get user's address from Microsoft Graph API
     const graphResponse = await apiClient.get(
       'https://graph.microsoft.com/v1.0/me?$select=streetAddress',
       {
@@ -62,7 +98,6 @@ onMounted(async () => {
       );
     }
 
-    // Step 3: Call your backend API with the user's address
     const officeDetailsResponse = await apiClient.get<Office>(
       '/api/offices/by-address',
       {
@@ -72,11 +107,9 @@ onMounted(async () => {
       }
     );
 
-    // Step 4: Set the data for display
     officeInfo.value = officeDetailsResponse.data;
   } catch (err: any) {
     console.error('Ofis bilgileri alınırken hata oluştu:', err);
-    // Check if the error is a 404 Not Found from our backend
     if (err.response && err.response.status === 404) {
       error.value = t('officeInfo.error404');
     } else {
