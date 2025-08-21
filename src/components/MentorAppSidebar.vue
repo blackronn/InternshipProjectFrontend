@@ -22,6 +22,9 @@
       <router-link v-if="isAdmin === '3'" to="/mentorhome/admin">
         {{ $t('mentorSidebar.admin') }}
       </router-link>
+      <router-link to="/mentorhome/evaluations">
+        {{ $t('mentorSidebar.evaluation') }}
+      </router-link>
     </nav>
 
     <!-- Alt bilgi -->
