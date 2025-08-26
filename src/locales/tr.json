@@ -49,6 +49,7 @@
     "assignmentTrack": "Görev Takibi",
     "announcement": "Duyuru İşlemleri",
     "support": "Stajyer Destek",
+    "evaluation": "Stajyer Değerlendirme",
     "admin": "Admin Paneli",
     "about": "Hakkında",
     "language": "Dil"
@@ -143,6 +144,14 @@
     "sort": {
       "assignedAt": "Atanma Tarihi",
       "dueDate": "Bitiş Tarihi"
+    },
+    "table": {
+      "name": "Ad",
+      "desc": "Açıklama",
+      "assigned": "Atayan",
+      "due": "Son Tarih",
+      "priority": "Öncelik",
+      "status": "Durum"
     }
   },
   "createAccount": {

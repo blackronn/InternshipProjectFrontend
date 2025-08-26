@@ -259,6 +259,31 @@ const routes: RouteRecordRaw[] = [
         meta: { title: 'Lantern | Hakkında' },
         component: () => import('@/views/AboutView.vue'),
       },
+      {
+        path: 'evaluations',
+        name: 'MentorEvaluationsList',
+        meta: {
+          title: 'Lantern | Stajyer Değerlendirme',
+          sidebar: true,
+          role: 'mentor',
+          sidebarLabelKey: 'menu.internEvaluation',
+        },
+        component: () =>
+          import(
+            '@/features/intern-evaluation/pages/InternEvaluationsListPage.vue'
+          ),
+      },
+      {
+        path: 'evaluations/:internId',
+        name: 'MentorEvaluationForm',
+        meta: {
+          title: 'Lantern | Değerlendirme Formu',
+          role: 'mentor',
+        },
+        component: () =>
+          import('@/features/intern-evaluation/pages/EvaluationFormPage.vue'),
+        props: true,
+      },
     ],
   },
 ];
@@ -293,6 +318,13 @@ router.beforeEach(async (to, from) => {
     title = (await fetchJobTitle()).toLowerCase();
   } catch {
     title = 'intern';
+  }
+  // GEÇİCİ: mentor gibi davran (yalnız geliştirme sırasında aç)
+  if (
+    typeof window !== 'undefined' &&
+    window.localStorage.getItem('force_mentor') === '1'
+  ) {
+    title = 'mentor';
   }
 
   // Internlerin mentorhome ve altlarını görmesi engellenir
