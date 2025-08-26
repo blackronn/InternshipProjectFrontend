@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "assignments": "Atanan Görevler",
+    "timesheet": "Zaman Takibi",
     "journal": "Stajyer Defter Bilgileri",
     "officeInfo": "Ofis Bilgileri",
     "supportStaff": "Stajyer Destek Sorumluları",
@@ -238,7 +239,8 @@
     "emptyFields": "Lütfen başlık ve içerik girin.",
     "mentorMissing": "Mentor ID bulunamadı.",
     "success": "Duyuru başarıyla eklendi!",
-    "failure": "Duyuru eklenirken bir hata oluştu."
+    "failure": "Duyuru eklenirken bir hata oluştu.",
+    "myAnnouncement": "Benim Duyurularım"
   },
   "greetings": {
     "morning": "Günaydın",
@@ -316,5 +318,20 @@
   },
   "staffView": {
     "title": "Senin İçin Buradayız"
+  }
+,
+  "timesheet": {
+    "issue": "Görev",
+    "key": "Toplam",
+    "total": "Toplam"
+  },
+  "days": {
+    "MO": "Pzt",
+    "TU": "Sal",
+    "WE": "Çar",
+    "TH": "Per",
+    "FR": "Cum",
+    "SA": "Cmt",
+    "SU": "Paz"
   }
 }

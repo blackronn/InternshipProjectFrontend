@@ -14,12 +14,24 @@
       <label for="content">{{
         $t('mentorAnnouncementForm.labelContent')
       }}</label>
-      <textarea id="content" v-model="content" required />
+      <!-- textarea self-closing olmamalı -->
+      <textarea id="content" v-model="content" required></textarea>
 
       <button type="submit">
         {{ $t('mentorAnnouncementForm.submitButton') }}
       </button>
     </form>
+  </div>
+
+  <div>
+    <h2>{{ $t('mentorAnnouncementForm.myAnnouncement') }}</h2>
+    <div class="announcements-grid">
+      <div v-for="(announcement, index) in announcements" :key="index">
+        <h3>{{ announcement.title }}</h3>
+        <p>{{ announcement.content }}</p>
+        <button @click="deleteAnnouncement(announcement.id)">Delete</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,8 +49,18 @@ const notificationMessage = ref('');
 const notificationType = ref<'success' | 'error' | 'info'>('info');
 const notificationShow = ref(false);
 
+interface Announcement {
+  id?: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  mentorId?: number;
+}
+
+const announcements = ref<Announcement[]>([]);
+
 const { accounts } = useMsal();
-const email = accounts.value[0].username;
+const email = accounts.value[0]?.username ?? '';
 
 function showNotification(
   message: string,
@@ -58,11 +80,40 @@ onMounted(async () => {
       `/api/mentors/email/${encodeURIComponent(email)}`
     );
     mentorId.value = res.data.id;
+    await loadAnnouncements();
   } catch (err) {
     console.error('Mentor ID alınamadı:', err);
     showNotification('mentorAnnouncementForm.mentorError', 'error');
   }
 });
+
+const deleteAnnouncement = async (id?: number) => {
+  if (!id) return;
+
+  try {
+    await apiClient.delete(`/api/announcements/${id}`);
+    showNotification('Announcement deleted', 'success');
+    await loadAnnouncements();
+  } catch (err: any) {
+    console.error('Duyuru silinemedi:', err);
+    showNotification('Announcement deletion failed', 'error');
+  }
+};
+
+const loadAnnouncements = async () => {
+  if (!mentorId.value) return;
+
+  try {
+    // Direkt mentor'a özel endpoint kullan
+    const res = await apiClient.get(
+      `/api/announcements/mentor/${mentorId.value}`
+    );
+    announcements.value = res.data;
+    console.log('Mentor duyuru sayısı:', announcements.value.length);
+  } catch (err) {
+    console.error('Duyurular yüklenemedi:', err);
+  }
+};
 
 const submitAnnouncement = async () => {
   if (!title.value || !content.value) {
@@ -85,6 +136,7 @@ const submitAnnouncement = async () => {
     showNotification('mentorAnnouncementForm.success', 'success');
     title.value = '';
     content.value = '';
+    await loadAnnouncements();
   } catch (err) {
     showNotification('mentorAnnouncementForm.failure', 'error');
     console.error(err);
@@ -164,5 +216,15 @@ button:hover {
   h2 {
     font-size: 1.5rem;
   }
+}
+.announcements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.announcement-card {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
 }
 </style>

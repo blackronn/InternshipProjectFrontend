@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "assignments": "Assigned Tasks",
+    "timesheet": "Time Tracking",
     "journal": "Intern Journal Info",
     "officeInfo": "Office Information",
     "supportStaff": "Intern Support Staff",
@@ -238,7 +239,8 @@
     "emptyFields": "Please enter both title and content.",
     "mentorMissing": "Mentor ID not found.",
     "success": "Announcement added successfully!",
-    "failure": "An error occurred while adding the announcement."
+    "failure": "An error occurred while adding the announcement.",
+    "myAnnouncement": "My Announcement"
   },
   "greetings": {
     "morning": "Good morning",
@@ -316,5 +318,20 @@
   },
   "staffView": {
     "title": "We're Here For You"
+  }
+,
+  "timesheet": {
+    "issue": "Issue",
+    "key": "Total (Row)",
+    "total": "Total"
+  },
+  "days": {
+    "MO": "MO",
+    "TU": "TU",
+    "WE": "WE",
+    "TH": "TH",
+    "FR": "FR",
+    "SA": "SA",
+    "SU": "SU"
   }
 }

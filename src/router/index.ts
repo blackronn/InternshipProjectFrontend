@@ -28,6 +28,7 @@ import InternSupportView from '@/views/InternSupportView.vue';
 import FaqView from '@/views/FaqView.vue';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InternReportForm from '@/components/InternReportForm.vue';
+import TimesheetView from '@/views/TimesheetView.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -194,6 +195,12 @@ const routes: RouteRecordRaw[] = [
         name: 'Rapor Gönder',
         component: InternReportForm,
         meta: { title: 'Lantern | Rapor Gönder', requiresAuth: true },
+      },
+      {
+        path: 'timesheet',
+        name: 'Timesheet',
+        component: TimesheetView,
+        meta: { title: 'Lantern | Zaman Takibi', requiresAuth: true },
       },
     ],
   },

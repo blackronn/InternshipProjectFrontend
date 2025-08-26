@@ -43,10 +43,9 @@
             </option>
           </select>
         </div>
-
         <div class="field">
           <label>{{ $t('internView.office') }}</label>
-          <select v-model="form.officeId" required>
+          <select v-model="form.officeId">
             <option value="" disabled selected>
               {{ $t('internView.selectOffice') }}
             </option>
@@ -102,10 +101,12 @@
 import { ref, reactive, onMounted } from 'vue';
 import { useMsal } from 'vue3-msal-plugin';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import api from '@/utils/apiClients';
 
 const { instance } = useMsal();
 const router = useRouter();
+const { t } = useI18n();
 
 const universities = ref<string[]>([]);
 const departments = ref<{ ID: number; PROGRAM_NAME: string }[]>([]);
@@ -150,13 +151,15 @@ onMounted(async () => {
   } catch (e) {
     universities.value = [];
   }
+
+  // Ofisleri yükle
+  try {
+    const res = await api.get('/api/offices');
+    offices.value = res.data;
+  } catch (e) {
+    offices.value = [];
+  }
 });
-try {
-  const res = await api.get('/api/offices');
-  offices.value = res.data;
-} catch (e) {
-  offices.value = [];
-}
 
 async function fetchDepartments() {
   form.department = ''; // seçili bölümü temizle
@@ -198,6 +201,12 @@ async function onSubmit() {
   const rawPhone = form.phone.replace(/\D/g, '');
   if (!/^05\d{9}$/.test(rawPhone)) {
     alert('Telefon numarası 05 ile başlamalı ve 11 rakam olmalı!');
+    return;
+  }
+
+  // Office seçimi kontrolü
+  if (!form.officeId) {
+    alert('Lütfen bir ofis seçiniz!');
     return;
   }
   const account = instance.getActiveAccount();

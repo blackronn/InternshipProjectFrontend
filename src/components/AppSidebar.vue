@@ -11,6 +11,9 @@
       <router-link to="/home/assignmentlist">{{
         $t('sidebar.assignments')
       }}</router-link>
+      <router-link to="/home/timesheet">{{
+        $t('sidebar.timesheet')
+      }}</router-link>
       <router-link to="/home/report">{{ $t('sidebar.journal') }}</router-link>
       <router-link to="/home/office">{{
         $t('sidebar.officeInfo')
