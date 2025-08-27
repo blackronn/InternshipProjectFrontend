@@ -12,6 +12,7 @@ import {
 } from '@/utils/timelogService';
 import { useMsal } from 'vue3-msal-plugin';
 import apiClient from '@/utils/apiClients';
+import AppNotification from '@/components/AppNotification.vue';
 
 const { t } = useI18n();
 
@@ -19,6 +20,23 @@ const assignments = ref<Assignment[]>([]);
 const timeLogs = ref<any[]>([]);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
+
+// Bildirim durumu
+const notificationMessage = ref('');
+const notificationType = ref<'success' | 'error' | 'info'>('info');
+const notificationShow = ref(false);
+
+const showNotification = (
+  message: string,
+  type: 'success' | 'error' | 'info' = 'info'
+) => {
+  notificationShow.value = false;
+  notificationMessage.value = message;
+  notificationType.value = type;
+  setTimeout(() => {
+    notificationShow.value = true;
+  }, 10);
+};
 
 const currentUserId = ref<number | null>(null);
 const internStartDate = ref<string | null>(null);
@@ -179,7 +197,10 @@ const openLogModalForCell = (taskId: number, iso: string) => {
   );
   const status = task?.status ?? (fullAssignment as any)?.status;
   if (!isInProgress(status)) {
-    alert('Bu görev tamamlandı veya aktif değil. Log girişi yapılamaz.');
+    showNotification(
+      'Bu görev tamamlandı veya aktif değil. Log girişi yapılamaz.',
+      'error'
+    );
     return;
   }
   modalAssignmentId.value = taskId;
@@ -187,6 +208,10 @@ const openLogModalForCell = (taskId: number, iso: string) => {
   modalDate.value = iso; // iso zaten toLocalYMD ile üretildi
   showLogModal.value = true;
 };
+
+// ======================
+// METOTLAR
+// ======================
 
 // Modal state
 const showLogModal = ref(false);
@@ -222,7 +247,7 @@ const saveLog = async () => {
     await fetchTimeLogs(currentUserId.value);
   } catch (err) {
     console.error('Log eklenirken hata oluştu:', err);
-    alert('Log eklenemedi!');
+    showNotification('notifications.errorOccurred', 'error');
   }
 };
 
@@ -260,7 +285,7 @@ const fetchTimeLogs = async (internId: number) => {
     timeLogs.value = logs as any;
   } catch (err) {
     console.error('Loglar çekilirken hata oluştu:', err);
-    alert('Loglar yüklenemedi!');
+    showNotification('notifications.errorOccurred', 'error');
   }
 };
 
@@ -304,6 +329,12 @@ onMounted(async () => {
 
 <template>
   <div class="timesheet-container">
+    <AppNotification
+      :message="notificationMessage"
+      :type="notificationType"
+      :show="notificationShow"
+      :duration="2200"
+    />
     <h2>Timesheet Görünümü</h2>
 
     <div v-if="isLoading" class="state-message">Yükleniyor...</div>
@@ -315,7 +346,7 @@ onMounted(async () => {
         <button @click="changeMonth(1)">▶</button>
       </div>
 
-      <!-- Timesheet Table -->
+      <!-- Clean Timesheet Table -->
       <div class="ts-card">
         <table class="ts-table">
           <thead>
@@ -472,7 +503,7 @@ h2 {
 }
 .error {
   background-color: #ffebee;
-  color: #c62828;
+  color: #ffffff;
 }
 
 /*Timesheet styles */
