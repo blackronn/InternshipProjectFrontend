@@ -29,6 +29,8 @@ import FaqView from '@/views/FaqView.vue';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InternReportForm from '@/components/InternReportForm.vue';
 import TimesheetView from '@/views/TimesheetView.vue';
+import InternsListView from '@/views/InternsListView.vue';
+import AnalysisDetailView from '@/views/AnalysisDetailView.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -210,6 +212,18 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'Lantern | Ana Sayfa' },
     component: MentorHomeView,
     children: [
+      {
+        path: 'analysis', // URL: /mentorhome/analysis
+        name: 'InternsListForAnalysis',
+        meta: { title: 'Lantern | Stajyer Analizleri' },
+        component: InternsListView,
+      },
+      {
+        path: 'analysis/:internId', // URL: /mentorhome/analysis/56
+        name: 'InternAnalysisDetail',
+        meta: { title: 'Lantern | Analiz Detayı' },
+        component: AnalysisDetailView,
+      },
       {
         path: 'mentorprofile',
         name: 'MentorProfile',

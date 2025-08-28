@@ -28,6 +28,8 @@
       <router-link to="/mentorhome/evaluations">
         {{ $t('mentorSidebar.evaluation') }}
       </router-link>
+
+      <router-link to="/mentorhome/analysis"> Stajyer Analizleri </router-link>
     </nav>
 
     <!-- Alt bilgi -->
