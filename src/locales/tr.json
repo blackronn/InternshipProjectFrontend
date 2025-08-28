@@ -49,7 +49,7 @@
     "assignmentTrack": "Görev Takibi",
     "announcement": "Duyuru İşlemleri",
     "support": "Stajyer Destek",
-    "evaluation": "Stajyer Değerlendirme",
+    "timesheetReports": "Zaman Takibi",
     "admin": "Admin Paneli",
     "about": "Hakkında",
     "language": "Dil"
@@ -141,17 +141,19 @@
       "statusAll": "Statü (Tümü)",
       "priorityAll": "Öncelik (Tümü)"
     },
+    "table": {
+      "name": "Görev Adı",
+      "desc": "Açıklama",
+      "assigned": "Atanma",
+      "due": "Bitiş",
+      "priority": "Öncelik",
+      "mentor": "Mentor",
+      "intern": "Stajyer",
+      "status": "Durum"
+    },
     "sort": {
       "assignedAt": "Atanma Tarihi",
       "dueDate": "Bitiş Tarihi"
-    },
-    "table": {
-      "name": "Ad",
-      "desc": "Açıklama",
-      "assigned": "Atayan",
-      "due": "Son Tarih",
-      "priority": "Öncelik",
-      "status": "Durum"
     }
   },
   "createAccount": {
@@ -288,6 +290,40 @@
     "surname": "Soyad",
     "expertise": "Uzmanlık Alanı",
     "submit": "Kaydı Tamamla"
+  },
+  "mentorTimesheet": {
+    "title": "Stajyer Zaman Takibi",
+    "selectIntern": "Stajyer Seçin",
+    "chooseIntern": "Bir stajyer seçin...",
+    "loadingInterns": "Stajyerler yükleniyor...",
+    "selectInternToView": "Lütfen bir stajyer seçin",
+    "email": "E-posta",
+    "university": "Üniversite",
+    "department": "Bölüm",
+    "period": "Staj Dönemi",
+    "startDate": "Başlangıç Tarihi",
+    "endDate": "Bitiş Tarihi",
+    "refresh": "Yenile",
+    "loadingData": "Veriler yükleniyor...",
+    "totalHours": "Toplam Saat",
+    "workingDays": "Çalışılan Gün",
+    "activeTasks": "Aktif Görev",
+    "avgDailyHours": "Günlük Ortalama",
+    "taskSummary": "Görev Özeti",
+    "taskName": "Görev Adı",
+    "priority": "Öncelik",
+    "status": "Durum",
+    "lastActivity": "Son Aktivite",
+    "dailyDetails": "Günlük Detaylar",
+    "date": "Tarih",
+    "task": "Görev",
+    "hours": "Saat",
+    "notes": "Notlar",
+    "weeklyTrend": "Haftalık Trend",
+    "noDataFound": "Veri bulunamadı",
+    "noDataSubtext": "Seçilen tarih aralığında zaman kaydı bulunmuyor",
+    "loadError": "Stajyerler yüklenirken hata oluştu",
+    "dataLoadError": "Stajyer verileri yüklenirken hata oluştu"
   },
   "officeInfo": {
     "loading": "Ofis bilgileri yükleniyor...",
