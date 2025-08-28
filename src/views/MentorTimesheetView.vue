@@ -275,7 +275,10 @@ const loadInterns = async () => {
     );
     const mentorId = mentorRes.data.id;
 
-    const internsRes = await apiClient.get(`/api/interns/${mentorId}/interns`);
+    // eslint-disable-next-line no-undef
+    const internsRes = await apiClient.get<Intern[]>(
+      `/api/interns/mentor/${mentorId}`
+    );
     interns.value = internsRes.data;
   } catch (err) {
     console.error('Stajyerler yüklenemedi:', err);
@@ -444,11 +447,13 @@ watch(selectedInternId, newId => {
   gap: 15px;
   margin-bottom: 20px;
 }
+
 .intern-brief {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .avatar {
   width: 32px;
   height: 32px;
@@ -461,28 +466,34 @@ watch(selectedInternId, newId => {
   font-weight: 700;
   font-size: 12px;
 }
+
 .meta .name {
   font-weight: 600;
   color: #222;
 }
+
 .meta .sub {
   color: #666;
   font-size: 12px;
 }
+
 .range-refresh {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .range {
   display: flex;
   align-items: center;
   gap: 6px;
 }
+
 .range input {
   padding: 4px 6px;
   border: 1px solid #ccc;
 }
+
 .btn {
   padding: 6px 10px;
   background: #242441;
@@ -497,33 +508,40 @@ watch(selectedInternId, newId => {
   border: 1px solid #ddd;
   padding: 8px;
 }
+
 .totals {
   display: flex;
   gap: 8px;
   margin-bottom: 6px;
 }
+
 .total-item {
   background: #f5f5f5;
   border: 1px solid #ddd;
   padding: 6px 8px;
 }
+
 .total-item .label {
   color: #555;
   font-size: 12px;
 }
+
 .total-item .value {
   font-weight: 600;
   color: #222;
   margin-left: 6px;
 }
+
 .table-wrapper {
   overflow-x: auto;
 }
+
 .compact-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
+
 .compact-table th {
   text-align: left;
   background: #242441;
@@ -532,21 +550,26 @@ watch(selectedInternId, newId => {
   padding: 10px;
   font-size: 16px;
 }
+
 .compact-table td {
   border: 1px solid #ddd;
   color: #222;
   padding: 12px;
 }
+
 .task-name {
   font-size: 15px;
 }
+
 .align-right {
   text-align: right;
   font-size: 15px;
 }
+
 .align-center {
   text-align: center;
 }
+
 .badge {
   background: #e0e0e0;
   color: #222;
