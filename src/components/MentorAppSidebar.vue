@@ -7,24 +7,26 @@
 
     <!-- Menü -->
     <nav class="sidebar">
-      <router-link to="/mentorhome/assignmentForm">{{
-        $t('mentorSidebar.assignmentOps')
-      }}</router-link>
-      <router-link to="/mentorhome/assignmentTracking">{{
-        $t('mentorSidebar.assignmentTrack')
-      }}</router-link>
-      <router-link to="/mentorhome/announcement">{{
-        $t('mentorSidebar.announcement')
-      }}</router-link>
-      <router-link to="/mentorhome/intern-support">{{
-        $t('mentorSidebar.support')
-      }}</router-link>
+      <router-link to="/mentorhome/assignmentForm"
+        >{{ $t('mentorSidebar.assignmentOps') }}
+      </router-link>
+      <router-link to="/mentorhome/assignmentTracking"
+        >{{ $t('mentorSidebar.assignmentTrack') }}
+      </router-link>
+      <router-link to="/mentorhome/announcement"
+        >{{ $t('mentorSidebar.announcement') }}
+      </router-link>
+      <router-link to="/mentorhome/intern-support"
+        >{{ $t('mentorSidebar.support') }}
+      </router-link>
       <router-link v-if="isAdmin === '3'" to="/mentorhome/admin">
         {{ $t('mentorSidebar.admin') }}
       </router-link>
       <router-link to="/mentorhome/evaluations">
         {{ $t('mentorSidebar.evaluation') }}
       </router-link>
+
+      <router-link to="/mentorhome/analysis"> Stajyer Analizleri </router-link>
     </nav>
 
     <!-- Alt bilgi -->
