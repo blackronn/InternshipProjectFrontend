@@ -52,7 +52,8 @@
     "timesheetReports": "Zaman Takibi",
     "admin": "Admin Paneli",
     "about": "Hakkında",
-    "language": "Dil"
+    "language": "Dil",
+    "evaluation": "Stajyer Değerlendirme"
   },
   "pie": {
     "done": "Yapıldı",
