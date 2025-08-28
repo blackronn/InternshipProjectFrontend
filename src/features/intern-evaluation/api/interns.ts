@@ -13,7 +13,7 @@ type ServerIntern = {
 
 export async function fetchMentorInterns(mentorId: number): Promise<Intern[]> {
   const { data } = await api.get<ServerIntern[]>(
-    `/api/interns/${mentorId}/interns`
+    `/api/interns/mentor/${mentorId}`
   );
   return data.map(x => ({
     id: x.id,

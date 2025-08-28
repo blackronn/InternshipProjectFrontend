@@ -182,7 +182,7 @@ import { fullName } from '../types';
 
 const router = useRouter();
 const route = useRoute();
-
+const showBypassHint = ref(false);
 const interns = ref<Intern[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
