@@ -532,10 +532,10 @@ h2 {
   min-width: 56px;
 }
 thead th {
-  background: #e1e1e1;
-  color: #3c4043;
+  background: #242441;
+  color: #ffffff;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 16px;
   padding: 8px 6px;
 }
 .ts-header-top th {
@@ -546,8 +546,8 @@ thead th {
   padding-top: 2px;
 }
 .ts-row td {
-  font-size: 13px;
-  padding: 8px 6px;
+  font-size: 16px;
+  padding: 14px 10px;
 }
 .ts-row:hover td {
   background: #fff;
