@@ -167,6 +167,10 @@
     "namePlaceholder": "Adınızı giriniz",
     "surnamePlaceholder": "Soyadınızı giriniz",
     "phonePlaceholder": "05xx xxx xx xx",
+    "gender": "Cinsiyet",
+    "genderFemale": "Kadın",
+    "genderMale": "Erkek",
+    "genderUnspecified": "Belirtmek istemiyorum",
     "submit": "Kaydı Tamamla"
   },
   "faq": {
@@ -237,6 +241,10 @@
     "email": "Email",
     "phone": "Telefon",
     "phonePlaceholder": "05xx xxx xx xx",
+    "gender": "Cinsiyet",
+    "genderFemale": "Kadın",
+    "genderMale": "Erkek",
+    "genderUnspecified": "Belirtmek istemiyorum",
     "submit": "Kaydı Tamamla"
   },
   "loginView": {

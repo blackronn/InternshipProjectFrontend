@@ -166,6 +166,10 @@
     "namePlaceholder": "Enter your name",
     "surnamePlaceholder": "Enter your surname",
     "phonePlaceholder": "05xx xxx xx xx",
+    "gender": "Gender",
+    "genderFemale": "Female",
+    "genderMale": "Male",
+    "genderUnspecified": "Prefer not to say",
     "submit": "Complete Registration"
   },
   "faq": {
@@ -234,6 +238,10 @@
     "email": "Email",
     "phone": "Phone",
     "phonePlaceholder": "05xx xxx xx xx",
+    "gender": "Gender",
+    "genderFemale": "Female",
+    "genderMale": "Male",
+    "genderUnspecified": "Prefer not to say",
     "submit": "Submit Registration"
   },
   "loginView": {

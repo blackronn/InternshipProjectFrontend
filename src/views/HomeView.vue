@@ -10,10 +10,10 @@ homeview
         @mouseenter="showMenu = true"
         @mouseleave="showMenu = false"
       >
-        <img src="@/assets/avatar.png" alt="Profile" class="profile-img" />
+        <AvatarCircle :gender="normGender" :size="32" :title="displayName" />
         <div v-if="showMenu" class="dropdown-menu">
           <router-link to="/home/profile"
-            >👤 {{ $t('home.profile') }}</router-link
+            >💻 {{ $t('home.profile') }}</router-link
           >
           <a href="#" @click.prevent="handleLogout"
             >🚪 {{ $t('home.logout') }}</a
@@ -44,6 +44,8 @@ import AppSidebar from '@/components/AppSidebar.vue';
 import type { AccountInfo } from '@azure/msal-browser';
 import Dashboard from '@/views/InternDashboard.vue';
 import { useI18n } from 'vue-i18n';
+import AvatarCircle from '@/components/AvatarCircle.vue';
+import apiClient from '@/utils/apiClients';
 
 const { t, locale } = useI18n();
 const router = useRouter();
@@ -51,14 +53,41 @@ const route = useRoute();
 const showMenu = ref(false);
 const isMsalReady = ref(false);
 const account = ref<AccountInfo | null>(null);
+const internGender = ref<'FEMALE' | 'MALE' | 'UNSPECIFIED' | string>(
+  'UNSPECIFIED'
+);
 
 onMounted(() => {
   const active = msalApp.getActiveAccount();
   if (active) {
     account.value = active;
     isMsalReady.value = true;
+    fetchInternGender(active.username);
   }
 });
+
+const displayName = computed(() => account.value?.name ?? 'Kullanıcı');
+
+function normalize(g?: string) {
+  const s = String(g || '').toLowerCase();
+  if (['female', 'kadın', 'kadin', 'f'].includes(s)) return 'female';
+  if (['male', 'erkek', 'm'].includes(s)) return 'male';
+  if (['female', 'male', 'unspecified'].includes(s)) return s as any;
+  return 'unspecified';
+}
+const normGender = computed(() => normalize(internGender.value));
+
+async function fetchInternGender(email: string) {
+  try {
+    const { data } = await apiClient.get('/api/interns/by-email', {
+      params: { email },
+    });
+    internGender.value = data?.gender ?? 'UNSPECIFIED';
+  } catch (e) {
+    console.warn('Intern gender alınamadı:', e);
+    internGender.value = 'UNSPECIFIED';
+  }
+}
 
 const isAdmin = computed(() => {
   const roles = (account.value?.idTokenClaims as any)?.roles || [];

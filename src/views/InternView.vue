@@ -91,6 +91,18 @@
             @input="formatPhone"
           />
         </div>
+        <div class="field">
+          <label>{{ $t('createAccount.gender') }}:</label>
+          <select v-model="form.gender" required>
+            <option value="FEMALE">
+              {{ $t('createAccount.genderFemale') }}
+            </option>
+            <option value="MALE">{{ $t('createAccount.genderMale') }}</option>
+            <option value="UNSPECIFIED">
+              {{ $t('createAccount.genderUnspecified') }}
+            </option>
+          </select>
+        </div>
         <button type="submit">{{ $t('internView.submit') }}</button>
       </form>
     </div>
@@ -122,6 +134,7 @@ const form = reactive({
   internshipEnd: '',
   email: '',
   phone: '',
+  gender: 'UNSPECIFIED',
 });
 
 // Azure'dan ad ve soyad otomatik, readonly olacak şekilde ayarlanıyor
@@ -224,6 +237,7 @@ async function onSubmit() {
       email: form.email,
       phoneNumber: rawPhone,
       role: 'Intern',
+      gender: form.gender,
     });
     alert('Stajyer kaydın başarıyla alındı!');
     router.replace({ name: 'Home' });

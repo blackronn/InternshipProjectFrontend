@@ -8,6 +8,8 @@ import {
   type EvaluationCreateRequest,
   type EvaluationUpdateRequest,
 } from '../api/evaluations';
+import { msalApp } from '@/main';
+import api from '@/utils/apiClients';
 
 const success = ref('');
 
@@ -19,7 +21,7 @@ const route = useRoute();
 const router = useRouter();
 
 const internId = Number(route.params.internId);
-const mentorId = Number(localStorage.getItem('mentor_id') || 0);
+const mentorId = ref<number | null>(null);
 
 const form = ref<{ comment: string }>({
   comment: '',
@@ -54,14 +56,30 @@ const average = computed(() => {
 const canSubmit = computed(
   () =>
     Object.values(ratings).every(v => typeof v === 'number') &&
-    !!mentorId &&
+    !!mentorId.value &&
     !!internId &&
     !loading.value
 );
 
 onMounted(async () => {
   try {
-    const existing = await getEvaluationByMentorAndIntern(mentorId, internId);
+    const email = msalApp.getActiveAccount()?.username;
+    if (!email) {
+      error.value = 'Oturum bulunamadı';
+      return;
+    }
+    const { data } = await api.get(
+      `/api/mentors/email/${encodeURIComponent(email)}`
+    );
+    mentorId.value = data?.id ?? null;
+    if (!mentorId.value) {
+      error.value = 'Mentor bulunamadı';
+      return;
+    }
+    const existing = await getEvaluationByMentorAndIntern(
+      mentorId.value,
+      internId
+    );
     if (existing) {
       // Edit moduna geç
       mode.value = 'edit';
@@ -101,14 +119,18 @@ async function submit() {
     if (mode.value === 'edit' && evaluationId.value) {
       const payload: EvaluationUpdateRequest = {
         ...base,
-        requestingMentorId: mentorId,
+        requestingMentorId: mentorId.value!,
       };
 
-      await updateEvaluation(evaluationId.value, payload, mentorId);
+      await updateEvaluation(evaluationId.value, payload, mentorId.value!);
 
       success.value = 'Güncellendi.';
     } else {
-      const payload: EvaluationCreateRequest = { mentorId, internId, ...base };
+      const payload: EvaluationCreateRequest = {
+        mentorId: mentorId.value!,
+        internId,
+        ...base,
+      };
       await createEvaluation(payload);
       success.value = 'Kaydedildi.';
     }

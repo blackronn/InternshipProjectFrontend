@@ -35,6 +35,18 @@
             :placeholder="$t('createAccount.phonePlaceholder')"
           />
         </div>
+        <div class="field">
+          <label>{{ $t('createAccount.gender') }}:</label>
+          <select v-model="form.gender" required>
+            <option value="FEMALE">
+              {{ $t('createAccount.genderFemale') }}
+            </option>
+            <option value="MALE">{{ $t('createAccount.genderMale') }}</option>
+            <option value="UNSPECIFIED">
+              {{ $t('createAccount.genderUnspecified') }}
+            </option>
+          </select>
+        </div>
         <button type="submit">{{ $t('createAccount.submit') }}</button>
       </form>
     </div>
@@ -54,6 +66,7 @@ const form = reactive({
   surname: '',
   email: '',
   phone: '',
+  gender: 'UNSPECIFIED',
 });
 
 onMounted(() => {
@@ -74,6 +87,7 @@ async function onSubmit() {
       email: form.email,
       phoneNumber: form.phone,
       role: 'NotIntern',
+      gender: form.gender,
     });
     alert('Mentor kaydın başarıyla alındı!');
     router.replace({ name: 'Home' });

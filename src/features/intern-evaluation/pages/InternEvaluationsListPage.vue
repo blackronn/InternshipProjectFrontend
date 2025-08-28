@@ -39,14 +39,6 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- Boş durum -->
-    <div v-else class="empty">Henüz size bağlı stajyer görünmüyor.</div>
-
-    <!-- yalnız bypass açıkken -->
-    <p v-if="showBypassHint" class="hint">
-      * Geçici test: <code>localStorage.setItem('mentor_id','65')</code>
-    </p>
   </div>
 </template>
 
@@ -179,6 +171,8 @@ import { fetchMentorInterns } from '../api/interns';
 import { getEvaluationByMentorAndIntern } from '../api/evaluations';
 import type { Intern } from '../types';
 import { fullName } from '../types';
+import { msalApp } from '@/main';
+import api from '@/utils/apiClients';
 
 const router = useRouter();
 const route = useRoute();
@@ -188,6 +182,7 @@ const loading = ref(true);
 const error = ref<string | null>(null);
 const toast = ref('');
 const evaluatedMap = ref<Record<number, boolean>>({});
+const mentorId = ref<number | null>(null);
 
 function isEvaluated(internId: number) {
   return !!evaluatedMap.value[internId];
@@ -216,28 +211,34 @@ onMounted(async () => {
   }
 
   try {
-    const mentorIdRaw = localStorage.getItem('mentor_id');
-    if (!mentorIdRaw) {
-      error.value =
-        'Mentor ID bulunamadı. (Console: localStorage.setItem("mentor_id","65"))';
-      return;
-    }
-    const mentorId = Number(mentorIdRaw);
-    if (Number.isNaN(mentorId)) {
-      error.value = 'Mentor ID geçersiz.';
+    const email = msalApp.getActiveAccount()?.username;
+    if (!email) {
+      error.value = 'Oturum bulunamadı.';
       return;
     }
 
-    const rows = await fetchMentorInterns(mentorId);
+    const { data } = await api.get(
+      `/api/mentors/email/${encodeURIComponent(email)}`
+    );
+    mentorId.value = data?.id ?? null;
+    if (!mentorId.value) {
+      error.value = 'Mentor bilgisi bulunamadı.';
+      return;
+    }
+
+    const rows = await fetchMentorInterns(mentorId.value);
     interns.value = rows;
 
     await Promise.all(
       rows.map(async it => {
         try {
-          const exists = await getEvaluationByMentorAndIntern(mentorId, it.id);
+          const exists = await getEvaluationByMentorAndIntern(
+            mentorId.value!,
+            it.id
+          );
           evaluatedMap.value[it.id] = !!exists;
         } catch {
-          evaluatedMap.value[it.id] = false; // 404 gibi durumlar: yok kabul et
+          evaluatedMap.value[it.id] = false;
         }
       })
     );

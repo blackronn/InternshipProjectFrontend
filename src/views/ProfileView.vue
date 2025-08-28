@@ -4,37 +4,53 @@
       <button class="back-button" @click="goHome">
         ← {{ $t('internProfile.back') }}
       </button>
-      <h2>👤 {{ $t('internProfile.title') }}</h2>
-      <div class="profile-info">
-        <p>
-          <strong>{{ $t('internProfile.name') }}:</strong> {{ intern.name }}
-          {{ intern.surname }}
-        </p>
-        <p>
-          <strong>{{ $t('internProfile.email') }}:</strong> {{ intern.email }}
-        </p>
-        <p>
-          <strong>{{ $t('internProfile.university') }}:</strong>
-          {{ intern.university }}
-        </p>
-        <p>
-          <strong>{{ $t('internProfile.department') }}:</strong>
-          {{ intern.department }}
-        </p>
-        <p>
-          <strong>{{ $t('internProfile.mentor') }}:</strong>
-          {{ intern.mentorName }}
-        </p>
+      <h2>{{ $t('internProfile.title') }}</h2>
+      <div
+        style="
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          margin-bottom: 12px;
+        "
+      >
+        <AvatarCircle
+          :gender="normGender"
+          :size="64"
+          :title="intern.name + ' ' + intern.surname"
+        />
+        <div class="profile-info">
+          <p>
+            <strong>{{ $t('internProfile.name') }}:</strong> {{ intern.name }}
+            {{ intern.surname }}
+          </p>
+          <p>
+            <strong>{{ $t('internProfile.email') }}:</strong> {{ intern.email }}
+          </p>
+          <p>
+            <strong>{{ $t('internProfile.university') }}:</strong>
+            {{ intern.university }}
+          </p>
+          <p>
+            <strong>{{ $t('internProfile.department') }}:</strong>
+            {{ intern.department }}
+          </p>
+          <p>
+            <strong>{{ $t('internProfile.mentor') }}:</strong>
+            {{ intern.mentorName }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMsal } from 'vue3-msal-plugin';
 import apiClient from '@/utils/apiClients';
+import AvatarCircle from '@/components/AvatarCircle.vue';
+import { normalizeGender } from '@/utils/avatar';
 
 const router = useRouter();
 
@@ -45,10 +61,22 @@ const intern = ref({
   university: '',
   department: '',
   mentorName: '',
+  gender: 'UNSPECIFIED',
 });
 
 const { accounts } = useMsal();
 const email = accounts.value[0].username;
+
+const normGender = computed(() =>
+  normalizeGender
+    ? normalizeGender(intern.value.gender)
+    : (g => {
+        const s = String(g || '').toLowerCase();
+        if (['female', 'kadın', 'kadin', 'f'].includes(s)) return 'female';
+        if (['male', 'erkek', 'm'].includes(s)) return 'male';
+        return 'unspecified';
+      })(intern.value.gender)
+);
 
 onMounted(async () => {
   try {
@@ -60,6 +88,7 @@ onMounted(async () => {
       university: res.data.university,
       department: res.data.department,
       mentorName: res.data.mentorName,
+      gender: res.data.gender ?? 'UNSPECIFIED',
     };
   } catch (err) {
     console.error('Profil bilgisi alınamadı:', err);
