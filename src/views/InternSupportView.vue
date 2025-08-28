@@ -144,7 +144,7 @@ onMounted(async () => {
     const { data: m } = await api.get<{ id: number }>(
       `/api/mentors/email/${email}`
     );
-    const resp = await api.get<Intern[]>(`/api/interns/${m.id}/interns`);
+    const resp = await api.get<Intern[]>(`/api/interns/mentor/${m.id}`);
     interns.value = resp.data;
   } catch {
     alert(t('internSupport.fetchError'));

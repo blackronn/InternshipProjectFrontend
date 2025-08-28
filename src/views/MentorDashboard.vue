@@ -156,7 +156,7 @@ watch(locale, () => {
 watch(mentorId, async newId => {
   if (newId !== null) {
     try {
-      const internsRes = await apiClient.get(`/api/interns/${newId}/interns`);
+      const internsRes = await apiClient.get(`/api/interns/mentor/${newId}`);
       interns.value = internsRes.data;
 
       const assignmentsRes = await apiClient.get(
@@ -176,7 +176,7 @@ onMounted(async () => {
   try {
     if (mentorId.value !== null) {
       const internsRes = await apiClient.get(
-        `/api/interns/${mentorId.value}/interns`
+        `/api/interns/mentor/${mentorId.value}`
       );
       interns.value = internsRes.data;
 

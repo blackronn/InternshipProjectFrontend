@@ -91,7 +91,7 @@ onMounted(async () => {
     form.value.mentorId = mentorData.id;
 
     const internRes = await apiClient.get(
-      `/api/interns/${mentorData.id}/interns`
+      `/api/interns/mentor/${mentorData.id}`
     );
     interns.value = internRes.data.map((i: any) => ({
       id: i.id,
