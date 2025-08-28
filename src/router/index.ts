@@ -254,6 +254,12 @@ const routes: RouteRecordRaw[] = [
         component: InternSupportView,
       },
       {
+        path: 'timesheet-reports',
+        name: 'MentorTimesheet',
+        meta: { title: 'Lantern | Stajyer Zaman Takibi' },
+        component: () => import('@/views/MentorTimesheetView.vue'),
+      },
+      {
         path: 'about',
         name: 'MentorAbout',
         meta: { title: 'Lantern | Hakkında' },
