@@ -228,6 +228,8 @@
     "surname": "Soyad",
     "university": "Üniversite",
     "department": "Bölüm",
+    "office": "Ofis",
+    "selectOffice": "Ofis Seçiniz",
     "selectUniversity": "Üniversite Seçiniz",
     "selectDepartment": "Bölüm Seçiniz",
     "startDate": "Staj Başlangıç Tarihi",
@@ -324,7 +326,12 @@
     "noDataFound": "Veri bulunamadı",
     "noDataSubtext": "Seçilen tarih aralığında zaman kaydı bulunmuyor",
     "loadError": "Stajyerler yüklenirken hata oluştu",
-    "dataLoadError": "Stajyer verileri yüklenirken hata oluştu"
+    "dataLoadError": "Stajyer verileri yüklenirken hata oluştu",
+    "exportTable": "Görev Özeti İndir",
+    "exportLogs": "Zaman Logları İndir",
+    "noDataToExport": "İndirilecek veri bulunamadı",
+    "tableExported": "Görev özeti başarıyla indirildi",
+    "logsExported": "Zaman logları başarıyla indirildi"
   },
   "officeInfo": {
     "loading": "Ofis bilgileri yükleniyor...",

@@ -70,10 +70,26 @@
               @change="onDateRangeChange"
             />
           </div>
-          <button class="btn" @click="refreshData" :disabled="isLoadingData">
-            <span v-if="isLoadingData" class="spinner-small"></span
-            >{{ $t('mentorTimesheet.refresh') }}
-          </button>
+          <div class="action-buttons">
+            <button class="btn" @click="refreshData" :disabled="isLoadingData">
+              <span v-if="isLoadingData" class="spinner-small"></span
+              >{{ $t('mentorTimesheet.refresh') }}
+            </button>
+            <button
+              class="btn btn-export"
+              @click="exportTableToCSV"
+              :disabled="!timeLogs.length"
+            >
+              {{ $t('mentorTimesheet.exportTable') }}
+            </button>
+            <button
+              class="btn btn-export"
+              @click="exportLogsToCSV"
+              :disabled="!timeLogs.length"
+            >
+              {{ $t('mentorTimesheet.exportLogs') }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -341,6 +357,90 @@ const refreshData = () => {
   loadInternData();
 };
 
+// CSV Export Functions
+const exportTableToCSV = () => {
+  if (!selectedIntern.value || !taskSummary.value.length) {
+    showNotification('mentorTimesheet.noDataToExport', 'info');
+    return;
+  }
+
+  const headers = ['Görev Adı', 'Durum', 'Toplam Saat', 'Son Aktivite'];
+
+  const csvData = taskSummary.value.map(task => [
+    task.name,
+    task.status,
+    `${task.totalHours.toFixed(1)}h`,
+    formatDate(task.lastActivity),
+  ]);
+
+  const csvContent = [headers, ...csvData]
+    .map(row => row.map(field => `"${field}"`).join(','))
+    .join('\n');
+
+  downloadCSV(
+    csvContent,
+    `gorev-ozeti-${selectedIntern.value.name}-${selectedIntern.value.surname}-${
+      new Date().toISOString().split('T')[0]
+    }.csv`
+  );
+
+  showNotification('mentorTimesheet.tableExported', 'success');
+};
+
+const exportLogsToCSV = () => {
+  if (!selectedIntern.value || !timeLogs.value.length) {
+    showNotification('mentorTimesheet.noDataToExport', 'info');
+    return;
+  }
+
+  const headers = ['Tarih', 'Görev Adı', 'Açıklama', 'Harcanan Saat', 'Durum'];
+
+  const csvData = timeLogs.value.map(log => {
+    const task = assignments.value.find(a => a.id === log.assignmentId);
+    const taskName = task
+      ? task.assignmentName || task.name || task.title
+      : 'Bilinmeyen Görev';
+
+    return [
+      formatDate(log.logDate),
+      taskName,
+      log.description || '',
+      `${log.spentTimeInHours || 0}h`,
+      task?.status || 'Bilinmeyen',
+    ];
+  });
+
+  const csvContent = [headers, ...csvData]
+    .map(row => row.map(field => `"${field}"`).join(','))
+    .join('\n');
+
+  downloadCSV(
+    csvContent,
+    `zaman-loglari-${selectedIntern.value.name}-${
+      selectedIntern.value.surname
+    }-${new Date().toISOString().split('T')[0]}.csv`
+  );
+
+  showNotification('mentorTimesheet.logsExported', 'success');
+};
+
+const downloadCSV = (content: string, filename: string) => {
+  const blob = new Blob(['\uFEFF' + content], {
+    type: 'text/csv;charset=utf-8;',
+  });
+  const link = document.createElement('a');
+
+  if (link.download !== undefined) {
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+};
+
 // Lifecycle
 onMounted(() => {
   loadInterns();
@@ -483,6 +583,12 @@ watch(selectedInternId, newId => {
   gap: 8px;
 }
 
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .range {
   display: flex;
   align-items: center;
@@ -500,6 +606,30 @@ watch(selectedInternId, newId => {
   color: #fff;
   border: 1px solid #333;
   cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-export {
+  background: #27ae60;
+  border-color: #229954;
+  /* yazı taşıyor onu düzelt */
+  overflow: hidden;
+  width: 100px;
+  height: 40px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-export:hover {
+  background: #229954;
+}
+
+.btn:disabled {
+  background: #bdc3c7;
+  border-color: #95a5a6;
+  cursor: not-allowed;
 }
 
 /* content */

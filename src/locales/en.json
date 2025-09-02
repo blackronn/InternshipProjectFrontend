@@ -323,7 +323,12 @@
     "noDataFound": "No data found",
     "noDataSubtext": "No time logs found in the selected date range",
     "loadError": "Error loading interns",
-    "dataLoadError": "Error loading intern data"
+    "dataLoadError": "Error loading intern data",
+    "exportTable": "Export Task Summary",
+    "exportLogs": "Export Time Logs",
+    "noDataToExport": "No data available to export",
+    "tableExported": "Task summary exported successfully",
+    "logsExported": "Time logs exported successfully"
   },
   "officeInfo": {
     "loading": "Loading office information...",
