@@ -110,6 +110,11 @@
           </div>
         </div>
 
+        <!-- Gün-Görev bazlı stacked bar chart -->
+        <div class="chart-wrapper">
+          <canvas ref="stackedCanvas"></canvas>
+        </div>
+
         <div class="table-wrapper">
           <table class="compact-table">
             <thead>
@@ -126,7 +131,13 @@
             </thead>
             <tbody>
               <tr v-for="task in taskSummary" :key="task.id">
-                <td class="task-name">{{ task.name }}</td>
+                <td class="task-name">
+                  <span
+                    class="prio-dot"
+                    :style="{ background: priorityColor(task.priority) }"
+                  ></span>
+                  {{ task.name }}
+                </td>
                 <td class="align-center">
                   <span class="badge">{{ $t('statuses.' + task.status) }}</span>
                 </td>
@@ -147,12 +158,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import {
+  ref,
+  computed,
+  onMounted,
+  watch,
+  nextTick,
+  onBeforeUnmount,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useMsal } from 'vue3-msal-plugin';
 import AppNotification from '@/components/AppNotification.vue';
 import apiClient from '@/utils/apiClients';
 import { getTimeLogsByDateRange } from '@/utils/timelogService';
+import {
+  Chart,
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Tooltip,
+} from 'chart.js';
 
 const { t } = useI18n();
 const { accounts } = useMsal();
@@ -179,6 +206,84 @@ const dateRange = ref({
     .split('T')[0], // 30 gün önce
   end: new Date().toISOString().split('T')[0], // Bugün
 });
+// Chart setup
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Tooltip
+);
+const stackedCanvas = ref<HTMLCanvasElement | null>(null);
+let stackedChart: Chart | null = null;
+
+const priorityColor = (p: string): string => {
+  const v = String(p || '').toLowerCase();
+  if (v.includes('critical') || v.includes('urgent') || v.includes('highest'))
+    return '#d32f2f';
+  if (v.includes('high')) return '#ef4444';
+  if (v.includes('medium') || v.includes('normal')) return '#f59e0b';
+  if (v.includes('low') || v.includes('lowest')) return '#10b981';
+  return '#9aa0a6';
+};
+
+const chartDays = computed(() => {
+  const days = new Set<string>();
+  timeLogs.value.forEach(l => {
+    const d = String(l.logDate || '').split('T')[0];
+    if (d) days.add(d);
+  });
+  return Array.from(days).sort();
+});
+
+const chartTasks = computed(() => {
+  const ids = new Set<number>();
+  timeLogs.value.forEach(l => ids.add(l.assignmentId));
+  return assignments.value.filter(a => ids.has(a.id));
+});
+
+const buildStackedData = () => {
+  const labels = chartDays.value;
+  const datasets = chartTasks.value.map(task => {
+    const data = labels.map(d => {
+      return timeLogs.value
+        .filter(
+          l =>
+            l.assignmentId === task.id &&
+            String(l.logDate || '').split('T')[0] === d
+        )
+        .reduce((s, l) => s + (l.spentTimeInHours || 0), 0);
+    });
+    return {
+      label: task.assignmentName || task.name || task.title,
+      data,
+      backgroundColor: priorityColor(task.priority || 'Medium'),
+      stack: 'hours',
+    } as any;
+  });
+  return { labels, datasets };
+};
+
+const renderStackedChart = () => {
+  if (!stackedCanvas.value) return;
+  const ctx = stackedCanvas.value.getContext('2d');
+  if (!ctx) return;
+  const { labels, datasets } = buildStackedData();
+  if (stackedChart) stackedChart.destroy();
+  stackedChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' }, tooltip: { enabled: true } },
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, title: { display: true, text: 'Saat' } },
+      },
+    },
+  });
+};
 
 // Computed
 const totalHours = computed(() => {
@@ -277,9 +382,9 @@ const onInternChange = () => {
   }
 };
 
-const onDateRangeChange = () => {
+const onDateRangeChange = async () => {
   if (selectedInternId.value) {
-    loadInternData();
+    await loadInternData();
   }
 };
 
@@ -350,6 +455,14 @@ const loadInternData = async () => {
     showNotification('mentorTimesheet.dataLoadError', 'error');
   } finally {
     isLoadingData.value = false;
+    // Canvas v-if altında; görünür olduktan sonra çiz
+    await nextTick();
+    if (timeLogs.value.length) {
+      renderStackedChart();
+    } else if (stackedChart) {
+      stackedChart.destroy();
+      stackedChart = null;
+    }
   }
 };
 
@@ -444,6 +557,12 @@ const downloadCSV = (content: string, filename: string) => {
 // Lifecycle
 onMounted(() => {
   loadInterns();
+  // responsive re-render on window resize (optional)
+  window.addEventListener('resize', renderStackedChart);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', renderStackedChart);
 });
 
 // Watchers
@@ -451,6 +570,19 @@ watch(selectedInternId, newId => {
   if (newId) {
     onInternChange();
   }
+});
+
+// Veri seti değiştiğinde grafiği tazele
+watch([timeLogs, assignments], () => {
+  // timeLogs boşsa grafiği sil
+  if (!timeLogs.value.length) {
+    if (stackedChart) {
+      stackedChart.destroy();
+      stackedChart = null;
+    }
+    return;
+  }
+  renderStackedChart();
 });
 </script>
 
@@ -664,6 +796,20 @@ watch(selectedInternId, newId => {
 
 .table-wrapper {
   overflow-x: auto;
+}
+
+.chart-wrapper {
+  margin: 10px 0 14px;
+}
+
+.prio-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  vertical-align: middle;
+  margin-right: 6px;
 }
 
 .compact-table {

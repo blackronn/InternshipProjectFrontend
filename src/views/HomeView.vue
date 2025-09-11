@@ -118,7 +118,6 @@ async function handleLogout() {
   height: 95vh;
   overflow-y: auto;
   overflow-x: hidden;
-  overflow: hidden;
 }
 
 .home-content {

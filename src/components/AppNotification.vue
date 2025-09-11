@@ -60,6 +60,10 @@ watch(
 .notification.info {
   background: #0eafc5;
 }
+.notification.warning {
+  background: #ffcc00;
+  color: #222;
+}
 
 .fade-enter-active,
 .fade-leave-active {

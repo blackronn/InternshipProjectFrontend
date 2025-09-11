@@ -60,6 +60,10 @@ const isInProgress = (status: string | undefined) => {
     s.includes('devam')
   );
 };
+const isCompleted = (status?: string) => {
+  const s = String(status || '').toLowerCase();
+  return s === 'completed' || s.includes('completed') || s === 'tamamlandı';
+};
 const myInProgressAssignments = computed(() =>
   myAssignments.value.filter(a => isInProgress((a as any).status))
 );
@@ -366,7 +370,12 @@ onMounted(async () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="t in taskRows" :key="t.id" class="ts-row">
+            <tr
+              v-for="t in taskRows"
+              :key="t.id"
+              class="ts-row"
+              :class="{ 'done-row': isCompleted(t.status) }"
+            >
               <td class="col-issue col-left">
                 <div class="issue-cell-content">
                   <span
@@ -557,6 +566,20 @@ thead th {
 }
 .issue-title {
   font-weight: 700;
+}
+.ts-row {
+  position: relative;
+}
+.ts-row.done-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #242441;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 .issue-cell-content {
   display: inline-flex;

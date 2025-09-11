@@ -101,7 +101,6 @@ function handleLogout() {
 .home-layout {
   display: flex;
   height: 95vh;
-  overflow: hidden;
 }
 
 .home-content {
@@ -113,7 +112,7 @@ function handleLogout() {
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .main-view {
